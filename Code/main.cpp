@@ -1,3 +1,9 @@
+// Part of GardenGrow.
+
+/*
+    Creates window and starts game.
+*/
+
 #include <SFML/Graphics.hpp>
 
 #include "options.h"

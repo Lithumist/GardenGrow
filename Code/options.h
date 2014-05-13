@@ -1,10 +1,10 @@
-// Part of GardenGrow
+// Part of GardenGrow.
 
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
 /*
-    Declares program option macros
+    Declares program option macros.
 */
 
 #define GG_WINDOW_WIDTH 800
