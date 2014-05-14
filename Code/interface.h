@@ -16,12 +16,10 @@ class ggInterface
 private:
     // assets
     sf::Texture txtBtnControl;
-    // sprites
-    sf::Sprite sprBtnPlay;
-    sf::Sprite sprBtnPause;
-    sf::Sprite sprBtnStop;
     // buttons
     ggButton btnPlay;
+    ggButton btnPause;
+    ggButton btnStop;
 
 public:
     bool loadAssets(); // first call this
