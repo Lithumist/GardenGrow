@@ -1,5 +1,6 @@
 // Part of GardenGrow.
 #include "interface.h"
+#include <iostream>
 
 bool ggInterface::loadAssets()
 {
@@ -27,6 +28,26 @@ void ggInterface::init()
     // stop button
     sprBtnStop.setTexture       ( txtBtnControl );
     sprBtnStop.setTextureRect   ( sf::IntRect(40,0,20,20) );
+
+
+    // set up buttons
+    btnPlay.init( sf::IntRect(0,0,20,20) , sf::IntRect(0,20,20,20) , &txtBtnControl);
+    btnPlay.setPosition( 20 , 20 );
+}
+
+void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
+{
+    btnPlay.onEvent( window, e );
+}
+
+void ggInterface::tick(sf::Window* window)
+{
+    // tick buttons
+    btnPlay.tick(window);
+    if ( btnPlay.doAction ) {
+        btnPlay.doAction = false;
+        std::cout << "Pressed.\n";
+    }
 }
 
 void ggInterface::draw( sf::RenderWindow* window )
@@ -36,7 +57,10 @@ void ggInterface::draw( sf::RenderWindow* window )
     sprBtnPause.setPosition(35,10);
     sprBtnStop.setPosition(60,10);
     
-    window->draw(sprBtnPlay);
-    window->draw(sprBtnPause);
-    window->draw(sprBtnStop);
+    //window->draw(sprBtnPlay);
+    //window->draw(sprBtnPause);
+    //window->draw(sprBtnStop);
+
+    // draw buttons
+    window->draw( btnPlay );
 }

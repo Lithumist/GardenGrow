@@ -26,7 +26,11 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 gameWindow.close();
+            
+            Interface.onEvent( &gameWindow, &event );
         }
+
+        Interface.tick( &gameWindow );
 
         gameWindow.clear();
         //gameWindow.draw(shape);

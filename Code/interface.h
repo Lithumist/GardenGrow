@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "options.h"
+#include "button.h"
 
 /*
     Declares a class for manipulating the 'editor-like' interface.
@@ -19,10 +20,14 @@ private:
     sf::Sprite sprBtnPlay;
     sf::Sprite sprBtnPause;
     sf::Sprite sprBtnStop;
+    // buttons
+    ggButton btnPlay;
 
 public:
     bool loadAssets(); // first call this
     void init(); // then this
+    void tick( sf::Window* window );
+    void onEvent( sf::Window* window , sf::Event* e );
     void draw( sf::RenderWindow* window );
 
 };
