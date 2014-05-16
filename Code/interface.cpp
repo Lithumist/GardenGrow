@@ -7,6 +7,7 @@ ggInterface::ggInterface()
 {
     ctrlHeldDown, midHeldDownPrev = false;
     mouseXPrev, mouseYPrev = 0;
+    gridVisible = true;
     zoomLevel = 1.0f;
     panX = 0.0f;
     panY = 0.0f;
@@ -46,6 +47,9 @@ void ggInterface::init()
 
     btnReset.init( sf::IntRect(180,0,60,20) , sf::IntRect(180,20,60,20) , &txtBtnControl );
     btnReset.setPosition( 228 , 5 );
+
+    btnGrid.init( sf::IntRect(0,40,20,20) , sf::IntRect(0,60,20,20) , &txtBtnControl );
+    btnGrid.setPosition( 296 , 5 );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
@@ -104,6 +108,7 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
     btnSave.onEvent( window, e );
     btnLoad.onEvent( window, e );
     btnReset.onEvent( window, e );
+    btnGrid.onEvent( window, e );
 }
 
 void ggInterface::tick(sf::Window* window)
@@ -115,6 +120,7 @@ void ggInterface::tick(sf::Window* window)
     btnSave.tick(window);
     btnLoad.tick(window);
     btnReset.tick(window);
+    btnGrid.tick(window);
 
     // use buttons
     if ( btnPlay.doAction ) {
@@ -139,6 +145,10 @@ void ggInterface::tick(sf::Window* window)
         btnReset.doAction = false;
         // Reset cells
         cells.clear();
+    }
+    if ( btnGrid.doAction ) {
+        btnGrid.doAction = false;
+        gridVisible = !gridVisible;
     }
 }
 
@@ -210,7 +220,9 @@ void ggInterface::draw( sf::RenderWindow* window )
         cells[c].draw( this, window );
     }
     // draw grid
-    drawGrid( window );
+    if ( gridVisible ) {
+        drawGrid( window );
+    }
     // draw interface background
     drawInterfaceBackground( window );
     // draw buttons
@@ -220,6 +232,7 @@ void ggInterface::draw( sf::RenderWindow* window )
     window->draw( btnSave );
     window->draw( btnLoad );
     window->draw( btnReset );
+    window->draw( btnGrid );
 }
 
 

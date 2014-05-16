@@ -21,11 +21,13 @@ private:
     // buttons
     ggButton btnPlay, btnPause, btnStop;
     ggButton btnSave, btnLoad, btnReset;
+    ggButton btnGrid;
     // cell list
     std::vector<ggCell> cells;
     // triggers
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;
+    bool gridVisible;
     // zoom
     float zoomLevel;
     float panX, panY;
