@@ -37,6 +37,15 @@ void ggInterface::init()
 
     btnStop.init( sf::IntRect(40,0,20,20) , sf::IntRect(40,20,20,20) , &txtBtnControl);
     btnStop.setPosition( 68 , 5 );
+
+    btnSave.init( sf::IntRect(60,0,60,20) , sf::IntRect(60,20,60,20) , &txtBtnControl );
+    btnSave.setPosition( 100 , 5 );
+
+    btnLoad.init( sf::IntRect(120,0,60,20) , sf::IntRect(120,20,60,20) , &txtBtnControl );
+    btnLoad.setPosition( 164 , 5 );
+
+    btnReset.init( sf::IntRect(180,0,60,20) , sf::IntRect(180,20,60,20) , &txtBtnControl );
+    btnReset.setPosition( 228 , 5 );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
@@ -92,6 +101,9 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
     btnPlay.onEvent( window, e );
     btnPause.onEvent( window, e );
     btnStop.onEvent( window, e );
+    btnSave.onEvent( window, e );
+    btnLoad.onEvent( window, e );
+    btnReset.onEvent( window, e );
 }
 
 void ggInterface::tick(sf::Window* window)
@@ -100,21 +112,33 @@ void ggInterface::tick(sf::Window* window)
     btnPlay.tick(window);
     btnPause.tick(window);
     btnStop.tick(window);
+    btnSave.tick(window);
+    btnLoad.tick(window);
+    btnReset.tick(window);
 
-    // temp use buttons to inc and dec zoom level
+    // use buttons
     if ( btnPlay.doAction ) {
         btnPlay.doAction = false;
-        panX -= 10.0f;
     }
     if ( btnPause.doAction ) {
         btnPause.doAction = false;
-        panX += 10.0f;
     }
     if ( btnStop.doAction ) {
         btnStop.doAction = false;
         zoomLevel = 1.0f;
         panX = 0.0f;
         panY = 0.0f;
+    }
+    if ( btnSave.doAction ) {
+        btnSave.doAction = false;
+    }
+    if ( btnLoad.doAction ) {
+        btnLoad.doAction = false;
+    }
+    if ( btnReset.doAction ) {
+        btnReset.doAction = false;
+        // Reset cells
+        cells.clear();
     }
 }
 
@@ -189,6 +213,9 @@ void ggInterface::draw( sf::RenderWindow* window )
     window->draw( btnPlay );
     window->draw( btnPause );
     window->draw( btnStop );
+    window->draw( btnSave );
+    window->draw( btnLoad );
+    window->draw( btnReset );
 }
 
 

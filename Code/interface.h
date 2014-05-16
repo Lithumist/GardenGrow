@@ -19,9 +19,8 @@ private:
     // assets
     sf::Texture txtBtnControl;
     // buttons
-    ggButton btnPlay;
-    ggButton btnPause;
-    ggButton btnStop;
+    ggButton btnPlay, btnPause, btnStop;
+    ggButton btnSave, btnLoad, btnReset;
     // cell list
     std::vector<ggCell> cells;
     // triggers
