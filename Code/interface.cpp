@@ -81,6 +81,8 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
     if ( e->type == sf::Event::MouseButtonPressed && e->mouseButton.button == sf::Mouse::Left ) {
         sf::Vector2i gridLocation = windowToGrid( e->mouseButton.x , e->mouseButton.y );
         std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
+        // add a cell
+        cells.push_back( ggCell(gridLocation.x, gridLocation.y) );
     }
 
     // update mid held
@@ -175,8 +177,10 @@ void ggInterface::pan(float dx , float dy)
 
 void ggInterface::draw( sf::RenderWindow* window )
 {
-    // draw test cells
-    drawCell(window,10,7,sf::Color::Blue);
+    // draw cells
+    for ( unsigned int c=0; c<cells.size(); ++c ) {
+        cells[c].draw( this, window );
+    }
     // draw grid
     drawGrid( window );
     // draw interface background
@@ -205,11 +209,14 @@ void ggInterface::drawGrid( sf::RenderWindow* window )
         return;
     }
 
-    // "constants" to alter the grid rendering SLIGHTLY to match the currnet pan
-    // gets the small delta if that means anything
+    // FUCKING GENIUS
+    // Constants to translate the grid by the smallest
+    // ... ammount possible to look like it's scrolling.
+    // At least 1 hour was spent thinking this up.
     float panXConstant, panYConstant;
     panXConstant = fmod( (float)panX , spacing );
     panYConstant = fmod( (float)panY , spacing );
+    // </god>
 
     // draw horisontal lines
     for ( float y=0; y<lineCountHor; ++y ) {

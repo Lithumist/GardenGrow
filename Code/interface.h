@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include "options.h"
 #include "button.h"
+#include "cell.h"
+#include <vector>
 
 /*
     Declares a class for manipulating the 'editor-like' interface.
@@ -20,6 +22,8 @@ private:
     ggButton btnPlay;
     ggButton btnPause;
     ggButton btnStop;
+    // cell list
+    std::vector<ggCell> cells;
     // triggers
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;
