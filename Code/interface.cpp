@@ -159,6 +159,10 @@ sf::Vector2i ggInterface::windowToGrid( int mouse_x , int mouse_y )
     working.x += panX / (zoomLevel * 20.0f);
     working.y += panY / (zoomLevel * 20.0f);
 
+    // handle negative integer division effects
+    if ( working.x < 0 ) working.x -= 1;
+    if ( working.y < 0 ) working.y -= 1;
+
     // convert to int
     result.x = (int)working.x;
     result.y = (int)working.y;
