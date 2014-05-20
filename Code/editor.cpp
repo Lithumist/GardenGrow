@@ -33,7 +33,7 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
         if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
             // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
-            i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, CELL_SEED) );
+            i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, CELL_TREE) );
         }
     }
 }
