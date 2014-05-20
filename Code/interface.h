@@ -22,14 +22,10 @@ private:
     // assets
     sf::Texture txtBtnControl;
 
-    // buttons
-    ggButton btnPlay, btnPause, btnStop;
-    ggButton btnSave, btnLoad, btnReset;
-    ggButton btnGrid;
-
     // cell list
     std::vector<ggCell> cellsAlpha;
     std::vector<ggCell> cellsBeta;
+    std::vector<ggCell> cellsInitial;
 
     // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
@@ -56,6 +52,13 @@ public:
     // cells list pointers
     std::vector<ggCell>* cellsScreen;
     std::vector<ggCell>* cellsNext;
+    std::vector<ggCell>* cellsPattern;
+
+    // buttons
+    ggButton btnPlay, btnPause, btnStop;
+    ggButton btnSave, btnLoad, btnReset;
+    ggButton btnGrid;
+    bool btnResetEnabled;
 
     // functions
     ggInterface();
@@ -73,6 +76,8 @@ public:
     sf::Vector2f gridToWindow( float grid_x , float grid_y );
 
     void addCell( ggCell cell );
+    void addCellInitial( ggCell cell );
+    void loadInitialCellPattern();
     void flipCellBuffers();
 
 };

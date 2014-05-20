@@ -16,16 +16,19 @@ class ggInterface;
 class ggCell
 {
 private:
-    // position (in grid coords)
-    int x, y;
-    // type
-    ggCellType type;
 
 public:
+    // position (in grid coords)
+    int x, y;
+
+    // type
+    ggCellType type;
     
+    // constructors
     ggCell();
     ggCell(int xgrid, int ygrid, ggCellType typ);
 
+    // functions
     void draw( ggInterface* i , sf::RenderWindow* window );
 
 };

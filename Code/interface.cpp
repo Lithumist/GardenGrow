@@ -16,6 +16,8 @@ ggInterface::ggInterface()
     wheelSensitivity = GG_MOUSEWHEEL_ZOOM_SENSITIVITY;
     cellsNext = &cellsAlpha;
     cellsScreen = &cellsBeta;
+    cellsPattern = &cellsInitial;
+    btnResetEnabled = false;
 }
 
 bool ggInterface::loadAssets()
@@ -118,18 +120,23 @@ void ggInterface::tick(sf::Window* window)
     btnReset.tick(window);
     btnGrid.tick(window);
 
-    // use buttons
+    // handle interface only buttons
+    if ( btnGrid.doAction ) {
+        btnGrid.doAction = false;
+        gridVisible = !gridVisible;
+    }
+    if ( btnReset.doAction ) {
+        btnReset.doAction = false;
+        if ( btnResetEnabled ) {
+            cellsPattern->clear();
+        }
+    }
+    /*
     if ( btnPlay.doAction ) {
         btnPlay.doAction = false;
     }
     if ( btnPause.doAction ) {
         btnPause.doAction = false;
-    }
-    if ( btnStop.doAction ) {
-        btnStop.doAction = false;
-        zoomLevel = 1.0f;
-        panX = 0.0f;
-        panY = 0.0f;
     }
     if ( btnSave.doAction ) {
         btnSave.doAction = false;
@@ -137,15 +144,7 @@ void ggInterface::tick(sf::Window* window)
     if ( btnLoad.doAction ) {
         btnLoad.doAction = false;
     }
-    if ( btnReset.doAction ) {
-        btnReset.doAction = false;
-        // Reset cells
-        cellsNext->clear();
-    }
-    if ( btnGrid.doAction ) {
-        btnGrid.doAction = false;
-        gridVisible = !gridVisible;
-    }
+    */
 }
 
 
@@ -313,4 +312,17 @@ void ggInterface::flipCellBuffers()
 
     // clear the vector that will be shown next
     cellsNext->clear();
+}
+
+void ggInterface::addCellInitial( ggCell cell ) {
+    cellsInitial.push_back( cell );
+}
+
+void ggInterface::loadInitialCellPattern() {
+    // copy ready to start game
+    cellsAlpha = cellsInitial;
+    cellsBeta.clear();
+
+    cellsNext = &cellsBeta;
+    cellsScreen = &cellsAlpha;
 }

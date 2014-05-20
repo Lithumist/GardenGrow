@@ -10,6 +10,7 @@
 #include "types.h"
 #include "interface.h"
 #include "editor.h"
+#include "game.h"
 
 int main()
 {
@@ -29,9 +30,15 @@ int main()
 
     // Create controller variable
     ggInterfaceController Control = CTRL_EDITOR;
+    ggInterfaceController ControlPrev = CTRL_EDITOR;
 
     // Create editor
     ggEditor Editor( &Interface , &Control );
+    Editor.onControl();
+
+    // Create game
+    ggGame Game( &Interface , &Control );
+
 
 
 
@@ -47,15 +54,27 @@ int main()
             
             Interface.onEvent( &gameWindow, &event );
             Editor.onEvent( &gameWindow, &event );
+            Game.onEvent( &gameWindow, &event );
         }
 
         // tick
         Interface.tick( &gameWindow );
+        // editor
+        ControlPrev = Control;
         Editor.tick( &gameWindow );
+        if (ControlPrev != Control) {
+            Game.onControl();
+        }
+        // game
+        ControlPrev = Control;
+        Game.tick( &gameWindow );
+        if (ControlPrev != Control) {
+            Editor.onControl();
+        }
 
         // decide whcih cell vector to draw
         if ( Control == CTRL_EDITOR ) {
-            cr = Interface.cellsNext;
+            cr = Interface.cellsPattern;
         } else if ( Control == CTRL_GAME ) {
             cr = Interface.cellsScreen;
         }
@@ -65,6 +84,7 @@ int main()
         gameWindow.draw( background );
         Interface.draw( &gameWindow , cr );
         Editor.draw( &gameWindow );
+        Game.draw( &gameWindow );
         gameWindow.display();
     }
 
