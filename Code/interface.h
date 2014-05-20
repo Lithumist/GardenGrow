@@ -10,13 +10,6 @@
 #include <vector>
 
 /*
-    Enums
-*/
-
-enum ggCellType             { CELL_SEED                 };
-enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME   };
-
-/*
     Declares a class for manipulating the 'editor-like' interface.
 */
 

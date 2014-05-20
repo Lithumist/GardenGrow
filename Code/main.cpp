@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "options.h"
+#include "types.h"
 #include "interface.h"
 #include "editor.h"
 

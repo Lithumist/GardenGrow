@@ -17,11 +17,13 @@ class ggCell
 private:
     // position (in grid coords)
     int x, y;
+    // type
+    ggCellType type;
 
 public:
     
     ggCell();
-    ggCell(int xgrid, int ygrid);
+    ggCell(int xgrid, int ygrid, ggCellType typ);
 
     void draw( ggInterface* i , sf::RenderWindow* window );
 

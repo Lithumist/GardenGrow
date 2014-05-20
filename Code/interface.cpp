@@ -290,7 +290,7 @@ void ggInterface::drawInterfaceBackground( sf::RenderWindow* window )
 void ggInterface::drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Color col )
 {
     // get grid pos
-    sf::Vector2f gridPos = gridToWindow( xpos , ypos );
+    sf::Vector2f gridPos = gridToWindow( (float)xpos , (float)ypos );
 
     // draw rectangle
     sf::RectangleShape cell(sf::Vector2f( zoomLevel*20.0f , zoomLevel*20.0f));
