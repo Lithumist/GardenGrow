@@ -5,6 +5,7 @@
 
 #include "interface.h"
 #include <SFML/Graphics.hpp>
+#include "types.h"
 
 /*
     The editor class. One of the classes that can take control of the interface.
