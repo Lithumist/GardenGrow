@@ -35,7 +35,8 @@ private:
     ggButton btnGrid;
 
     // cell list
-    std::vector<ggCell> cells;
+    std::vector<ggCell> cellsAlpha;
+    std::vector<ggCell> cellsBeta;
 
     // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
@@ -59,6 +60,11 @@ private:
     void drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Color col );
 
 public:
+    // cells list pointers
+    std::vector<ggCell>* cellsScreen;
+    std::vector<ggCell>* cellsNext;
+
+    // functions
     ggInterface();
 
     bool loadAssets(); // first call this
@@ -66,12 +72,15 @@ public:
 
     void tick( sf::Window* window );
     void onEvent( sf::Window* window , sf::Event* e );
-    void draw( sf::RenderWindow* window );
+    void draw( sf::RenderWindow* window , std::vector<ggCell>* cellVectorToDraw );
 
     void pan( float dx , float dy );
 
     sf::Vector2i windowToGrid( int mouse_x , int mouse_y );
     sf::Vector2f gridToWindow( float grid_x , float grid_y );
+
+    void addCell( ggCell cell );
+    void flipCellBuffers();
 
 };
 

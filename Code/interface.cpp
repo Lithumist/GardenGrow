@@ -14,6 +14,8 @@ ggInterface::ggInterface()
     colGrid.a=              128; colGrid.r=              255; colGrid.g=              255; colGrid.b=             255;
     colControlBackground.a= 255; colControlBackground.r= 128; colControlBackground.g= 64; colControlBackground.b= 255;
     wheelSensitivity = GG_MOUSEWHEEL_ZOOM_SENSITIVITY;
+    cellsNext = &cellsAlpha;
+    cellsScreen = &cellsBeta;
 }
 
 bool ggInterface::loadAssets()
@@ -138,7 +140,7 @@ void ggInterface::tick(sf::Window* window)
     if ( btnReset.doAction ) {
         btnReset.doAction = false;
         // Reset cells
-        cells.clear();
+        //cells.clear();
     }
     if ( btnGrid.doAction ) {
         btnGrid.doAction = false;
@@ -200,11 +202,11 @@ void ggInterface::pan(float dx , float dy)
     panY += dy;
 }
 
-void ggInterface::draw( sf::RenderWindow* window )
+void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVectorToDraw )
 {
     // draw cells
-    for ( unsigned int c=0; c<cells.size(); ++c ) {
-        cells[c].draw( this, window );
+    for ( unsigned int c=0; c<cellVectorToDraw->size(); ++c ) {
+        cellVectorToDraw->at(c).draw( this, window );
     }
 
     // draw grid
@@ -294,4 +296,20 @@ void ggInterface::drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Co
     sf::RectangleShape cell(sf::Vector2f( zoomLevel*20.0f , zoomLevel*20.0f));
     cell.setPosition( gridPos.x-panX, gridPos.y-panY );
     window->draw( cell );
+}
+
+void ggInterface::addCell( ggCell cell ) {
+    cellsNext->push_back( cell );
+}
+
+void ggInterface::flipCellBuffers()
+{
+    // No xor to be found here...
+    // swap the pointers
+    std::vector<ggCell>* temp = cellsScreen;
+    cellsScreen = cellsNext;
+    cellsNext = temp;
+
+    // clear the vector that will be shown next
+    cellsNext->clear();
 }

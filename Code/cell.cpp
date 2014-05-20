@@ -16,5 +16,5 @@ ggCell::ggCell(int xgrid, int ygrid) :
 // Draw function
 void ggCell::draw( ggInterface* i , sf::RenderWindow* window  )
 {
-    i->drawCell( window, x, y, sf::Color::Cyan );
+    i->drawCell( window, x, y, sf::Color::Red );
 }

@@ -17,4 +17,6 @@
 #define GG_GRID_DRAW_THRESHOLD 500
 // GG_GRID_DRAW_THRESHOLD the higher the value, the quicker the grid WONT be drawn on zoom out
 
+#define GG_BACKGROUND_COLOUR sf::Color(112,64,24)
+
 #endif
