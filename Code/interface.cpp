@@ -19,11 +19,9 @@ ggInterface::ggInterface()
 bool ggInterface::loadAssets()
 {
     bool success = true;
-    
     if ( !txtBtnControl.loadFromFile("data/btn_control.png") ) {
         success = false;
     }
-
     return success;
 }
 
@@ -55,11 +53,7 @@ void ggInterface::init()
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
 {
     // update ctrl trigger
-    if ( sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ) {
-        ctrlHeldDown = true;
-    } else {
-        ctrlHeldDown = false;
-    }
+    ctrlHeldDown = sf::Keyboard::isKeyPressed(sf::Keyboard::LControl);
 
     // adjust zoom based on mouse wheel
     if ( ctrlHeldDown ) {
@@ -92,13 +86,13 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
 
     // handle mouse click on grid
     if ( e->type == sf::Event::MouseButtonPressed && e->mouseButton.button == sf::Mouse::Left ) {
-        sf::Vector2i gridLocation = windowToGrid( e->mouseButton.x , e->mouseButton.y );
-        std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
+        //sf::Vector2i gridLocation = windowToGrid( e->mouseButton.x , e->mouseButton.y );
+        //std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
         // add a cell
-        cells.push_back( ggCell(gridLocation.x, gridLocation.y) );
+        //cells.push_back( ggCell(gridLocation.x, gridLocation.y) );
     }
 
-    // update mid held
+    // update mid-previous trigger
     midHeldDownPrev = sf::Mouse::isButtonPressed(sf::Mouse::Middle);
 
     // do buton events
@@ -188,13 +182,6 @@ sf::Vector2f ggInterface::gridToWindow( float grid_x , float grid_y )
     working.x = (float)grid_x;
     working.y = (float)grid_y;
 
-    // apply pan
-    /*
-     copy and pasted from windowToGrid function, not needed here.
-    working.x += panX / (zoomLevel * 20.0f);
-    working.y += panY / (zoomLevel * 20.0f);
-    */
-
     // convert grid coords to mouse coords.
     // (top left)
     working.x = grid_x * (zoomLevel * 20.0f);
@@ -219,12 +206,15 @@ void ggInterface::draw( sf::RenderWindow* window )
     for ( unsigned int c=0; c<cells.size(); ++c ) {
         cells[c].draw( this, window );
     }
+
     // draw grid
     if ( gridVisible ) {
         drawGrid( window );
     }
+
     // draw interface background
     drawInterfaceBackground( window );
+
     // draw buttons
     window->draw( btnPlay );
     window->draw( btnPause );

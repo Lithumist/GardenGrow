@@ -10,6 +10,12 @@
 #include <vector>
 
 /*
+    Cell type enum
+*/
+
+enum ggCellType { CELL_SEED };
+
+/*
     Declares a class for manipulating the 'editor-like' interface.
 */
 
@@ -18,41 +24,50 @@ class ggInterface
 private:
     // assets
     sf::Texture txtBtnControl;
+
     // buttons
     ggButton btnPlay, btnPause, btnStop;
     ggButton btnSave, btnLoad, btnReset;
     ggButton btnGrid;
+
     // cell list
     std::vector<ggCell> cells;
-    // triggers
+
+    // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;
-    bool gridVisible;
-    // zoom
+
+    // zoom and pan variables
     float zoomLevel;
     float panX, panY;
     float wheelSensitivity;
+
     // colours
     sf::Color colGrid;
     sf::Color colControlBackground;
+
+    // control flags
+    bool gridVisible;
+
     // helper functions
     void drawGrid( sf::RenderWindow* window );
     void drawInterfaceBackground( sf::RenderWindow* window );
-
-    sf::Vector2i windowToGrid( int mouse_x , int mouse_y );
-    sf::Vector2f gridToWindow( float grid_x , float grid_y );
+    void drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Color col );
 
 public:
     ggInterface();
 
     bool loadAssets(); // first call this
     void init(); // then this
+
     void tick( sf::Window* window );
     void onEvent( sf::Window* window , sf::Event* e );
     void draw( sf::RenderWindow* window );
-    void drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Color col );
 
     void pan( float dx , float dy );
+
+    sf::Vector2i windowToGrid( int mouse_x , int mouse_y );
+    sf::Vector2f gridToWindow( float grid_x , float grid_y );
 
 };
 
