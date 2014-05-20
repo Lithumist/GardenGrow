@@ -19,8 +19,11 @@ enum ggCellType { CELL_SEED };
     Declares a class for manipulating the 'editor-like' interface.
 */
 
+class ggCell;
+
 class ggInterface
 {
+    friend class ggCell;
 private:
     // assets
     sf::Texture txtBtnControl;
