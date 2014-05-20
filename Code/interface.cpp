@@ -65,6 +65,7 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
             //std::cout << "mouse wheel delta: " << e->mouseWheel.delta << std::endl;
             float zoomDelta = (float)(e->mouseWheel.delta) * wheelSensitivity;
             zoomLevel += zoomDelta;
+            if ( zoomLevel < 0.1f ) zoomLevel = 0.1f;
         }
     }
 
@@ -132,9 +133,6 @@ void ggInterface::tick(sf::Window* window)
         }
     }
     /*
-    if ( btnPlay.doAction ) {
-        btnPlay.doAction = false;
-    }
     if ( btnPause.doAction ) {
         btnPause.doAction = false;
     }
