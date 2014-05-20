@@ -4,6 +4,7 @@
 #define CELL_H
 
 #include <SFML/Graphics.hpp>
+#include "types.h"
 
 class ggInterface;
 
