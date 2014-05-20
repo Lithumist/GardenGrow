@@ -140,7 +140,7 @@ void ggInterface::tick(sf::Window* window)
     if ( btnReset.doAction ) {
         btnReset.doAction = false;
         // Reset cells
-        //cells.clear();
+        cellsNext->clear();
     }
     if ( btnGrid.doAction ) {
         btnGrid.doAction = false;
@@ -295,6 +295,7 @@ void ggInterface::drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Co
     // draw rectangle
     sf::RectangleShape cell(sf::Vector2f( zoomLevel*20.0f , zoomLevel*20.0f));
     cell.setPosition( gridPos.x-panX, gridPos.y-panY );
+    cell.setFillColor( col );
     window->draw( cell );
 }
 
