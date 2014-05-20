@@ -51,19 +51,45 @@ void ggGame::tick( sf::Window* window )
     if ( tickTimer.getElapsedTime() >= timeForOneTick )
     {
         std::cout << "Tick.\n";
-        /* <game logic> */
+        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
+        {
+            /****************/
+            /* <game logic> */
+            /****************/
+            ggCell oldCell( i->cellsScreen->at(t) );
 
-        // move all cells to the right
-        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t ) {
-            ggCell cell( i->cellsScreen->at(t) );
-            cell.x += 1;
-            i->addCell( cell );
+            // if there already is a cell here, then skip this
+            int co = 0;
+            i->cellAt(oldCell.x , oldCell.y, false, &co);
+            if ( co > 1 ) {
+                i->cellsScreen->at(t).disable = true;
+                continue;
+            }
+
+            switch( oldCell.type )
+            {
+                case CELL_STONE:
+                    // does nothing.
+                break;
+
+                case CELL_WATER:
+                    // spawns 4 new water tiles if there are at least 2 water tiles adjacent
+                    int c = 0;
+                    i->cellAt(oldCell.x, oldCell.y, true, &c);
+                    if( c >= 2 ) {
+                        i->addCell(ggCell( oldCell.x+1 , oldCell.y , CELL_WATER));
+                        i->addCell(ggCell( oldCell.x-1 , oldCell.y , CELL_WATER));
+                        i->addCell(ggCell( oldCell.x , oldCell.y+1 , CELL_WATER));
+                        i->addCell(ggCell( oldCell.x , oldCell.y-1 , CELL_WATER));
+                    }
+                break;
+            }
+
+            /*****************/
+            /* </game logic> */
+            /*****************/
         }
-
-        // swap buffers
         i->flipCellBuffers();
-
-        /* </game logic> */
         tickTimer.restart();
     }
 }

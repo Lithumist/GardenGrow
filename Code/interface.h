@@ -84,6 +84,7 @@ public:
     void addCellInitial( ggCell cell );
     void loadInitialCellPattern();
     void flipCellBuffers();
+    ggCell* cellAt(int x, int y, bool adj, int* count);
 
 };
 

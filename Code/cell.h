@@ -23,6 +23,9 @@ public:
 
     // type
     ggCellType type;
+
+    // options
+    bool disable;
     
     // constructors
     ggCell();
