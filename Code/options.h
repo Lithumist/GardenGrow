@@ -19,7 +19,7 @@
 
 #define GG_BACKGROUND_COLOUR sf::Color(112,64,24)
 
-#define GG_DEFAULT_TICK_TIME 0.06f 
+#define GG_DEFAULT_TICK_TIME 0.4f 
 // GG_DEFAULT_TICK_TIME is in seconds.
 
 #endif

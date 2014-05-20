@@ -18,8 +18,9 @@ ggEditor::ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl )
 void ggEditor::onControl()
 {
     std::cout << "Editor in control now.\n";
-    // Modify the enabled interface buttons
+    // Modify interface options
     i->btnResetEnabled = true;
+    i->tileSelectorEnabled = true;
 }
 
 void ggEditor::onEvent( sf::Window* window , sf::Event* e )
@@ -33,7 +34,7 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
         if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
             // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
-            i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, CELL_TREE) );
+            i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
         }
     }
 }

@@ -21,8 +21,9 @@ void ggGame::onControl()
 {
     std::cout << "Game in control now.\n";
 
-    // Set appropriate buttons active and inactive
+    // Modify interface options
     i->btnResetEnabled = false;
+    i->tileSelectorEnabled = false;
 }
 
 void ggGame::onEvent( sf::Window* window , sf::Event* e )

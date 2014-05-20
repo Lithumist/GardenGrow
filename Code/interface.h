@@ -47,12 +47,17 @@ private:
     void drawGrid( sf::RenderWindow* window );
     void drawInterfaceBackground( sf::RenderWindow* window );
     void drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Color col );
+    void drawSelectedTile( sf::RenderWindow* window, int mx, int my );
 
 public:
     // cells list pointers
     std::vector<ggCell>* cellsScreen;
     std::vector<ggCell>* cellsNext;
     std::vector<ggCell>* cellsPattern;
+
+    // tile placing variables and flags
+    bool tileSelectorEnabled;
+    ggCellType selectedType;
 
     // buttons
     ggButton btnPlay, btnPause, btnStop;

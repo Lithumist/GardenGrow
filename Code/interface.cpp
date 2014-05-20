@@ -18,6 +18,8 @@ ggInterface::ggInterface()
     cellsScreen = &cellsBeta;
     cellsPattern = &cellsInitial;
     btnResetEnabled = false;
+    tileSelectorEnabled = false;
+    selectedType = CELL_STONE;
 }
 
 bool ggInterface::loadAssets()
@@ -211,6 +213,11 @@ void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVect
         drawGrid( window );
     }
 
+    // draw selected tile
+    if (tileSelectorEnabled) {
+        drawSelectedTile( window , sf::Mouse::getPosition(*window).x , sf::Mouse::getPosition(*window).y );
+    }
+
     // draw interface background
     drawInterfaceBackground( window );
 
@@ -294,6 +301,14 @@ void ggInterface::drawCell( sf::RenderWindow* window, int xpos, int ypos, sf::Co
     cell.setPosition( gridPos.x-panX, gridPos.y-panY );
     cell.setFillColor( col );
     window->draw( cell );
+}
+
+void ggInterface::drawSelectedTile( sf::RenderWindow* window, int mx, int my )
+{
+    // create and draw cell
+    sf::Vector2i g = windowToGrid( mx , my );
+    ggCell cell(g.x,g.y,selectedType);
+    cell.draw( this , window );
 }
 
 void ggInterface::addCell( ggCell cell ) {
