@@ -8,17 +8,26 @@
 
 #include "options.h"
 #include "interface.h"
+#include "editor.h"
 
 int main()
 {
     sf::RenderWindow gameWindow( sf::VideoMode (GG_WINDOW_WIDTH,GG_WINDOW_HEIGHT) , GG_WINDOW_CAPTION , sf::Style::Titlebar | sf::Style::Close );
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 
+    // Create interface
     ggInterface Interface;
     Interface.loadAssets();
     Interface.init();
 
+    // Create controller variable
+    ggInterfaceController Control = CTRL_EDITOR;
+
+    // Create editor
+    ggEditor Editor( &Interface , &Control );
+
+
+
+    // Game loop
     while (gameWindow.isOpen())
     {
         sf::Event event;
