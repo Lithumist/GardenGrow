@@ -70,6 +70,19 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
             if ( zoomLevel < 0.1f ) zoomLevel = 0.1f;
         }
     }
+    else if (tileSelectorEnabled)
+    {
+        // adjust tile selection based on mouse wheel
+        if ( e->type == sf::Event::MouseWheelMoved ) {
+            selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
+            if ( selectedType < 0 ) {
+                selectedType = CELL_SEED;
+            }
+            if ( selectedType > 2 ) {
+                selectedType = CELL_STONE;
+            }
+        }
+    }
 
     if ( ctrlHeldDown && sf::Mouse::isButtonPressed(sf::Mouse::Middle) && !midHeldDownPrev )
     {
