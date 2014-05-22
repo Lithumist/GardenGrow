@@ -59,12 +59,7 @@ void ggGame::tick( sf::Window* window )
             ggCell oldCell( i->cellsScreen->at(t) );
 
             // if there already is a cell here, then skip this
-            int co = 0;
-            i->cellAt(oldCell.x , oldCell.y, false, &co);
-            if ( co > 1 ) {
-                i->cellsScreen->at(t).disable = true;
-                continue;
-            }
+            // FIXME -> ugh...
 
             switch( oldCell.type )
             {
@@ -73,15 +68,7 @@ void ggGame::tick( sf::Window* window )
                 break;
 
                 case CELL_WATER:
-                    // spawns 4 new water tiles if there are at least 2 water tiles adjacent
-                    int c = 0;
-                    i->cellAt(oldCell.x, oldCell.y, true, &c);
-                    if( c >= 2 ) {
-                        i->addCell(ggCell( oldCell.x+1 , oldCell.y , CELL_WATER));
-                        i->addCell(ggCell( oldCell.x-1 , oldCell.y , CELL_WATER));
-                        i->addCell(ggCell( oldCell.x , oldCell.y+1 , CELL_WATER));
-                        i->addCell(ggCell( oldCell.x , oldCell.y-1 , CELL_WATER));
-                    }
+                    // idk yet.
                 break;
             }
 

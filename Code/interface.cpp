@@ -353,53 +353,17 @@ void ggInterface::loadInitialCellPattern() {
     cellsScreen = &cellsAlpha;
 }
 
-ggCell* ggInterface::cellAt(int x, int y, bool adj, int* count)
+
+// ---
+// search functions
+// ---
+
+int ggInterface::countCellsAt(int x, int y)
 {
-    // fucking hell.
-    // this needs to improve.
+    return 0;
+}
 
-    if ( !adj )
-    {
-        int co = 0;
-        ggCell* adr = NULL;
-        for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
-            if ( cellsScreen->at(c).x == x && cellsScreen->at(c).y == y && !cellsScreen->at(c).disable ) {
-                co++;
-                adr =  &cellsScreen->at(c);
-            }
-        }
-        if ( count ) {
-            *count = co;
-        }
-
-        return adr;
-    }
-
-    else
-    
-    {
-        for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
-            if ( 
-                (cellsScreen->at(c).x == x+1 && cellsScreen->at(c).y == y && !cellsScreen->at(c).disable) ||
-                (cellsScreen->at(c).x == x-1 && cellsScreen->at(c).y == y && !cellsScreen->at(c).disable) ||
-                (cellsScreen->at(c).x == x && cellsScreen->at(c).y == y+1 && !cellsScreen->at(c).disable) ||
-                (cellsScreen->at(c).x == x && cellsScreen->at(c).y == y-1 && !cellsScreen->at(c).disable)
-               ) {
-                
-                int c = 0;
-
-                if ( cellAt( x+1 , y , false , NULL ) ) c++;
-                if ( cellAt( x-1 , y , false , NULL ) ) c++;
-                if ( cellAt( x , y+1 , false , NULL ) ) c++;
-                if ( cellAt( x , y-1 , false , NULL ) ) c++;
-
-                if ( count ) {
-                    *count = c;
-                }
-
-                return NULL;
-
-            }
-        }
-    }
+ggCell* ggInterface::cellAt(int x, int y)
+{
+    return NULL;
 }
