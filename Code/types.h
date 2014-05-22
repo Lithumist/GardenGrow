@@ -7,9 +7,10 @@
     Declares basic enum types
 */
 
-enum ggCellType             { CELL_STONE , 
+enum ggCellType             { CELL_ANY , 
+                              CELL_STONE , 
                               CELL_WATER , 
-                              CELL_SEED ,
+                              CELL_SEED , 
                               CELL_SPROUT , 
                               CELL_PLANT , 
                               CELL_FLOWER , 

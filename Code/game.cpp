@@ -56,6 +56,15 @@ void ggGame::tick( sf::Window* window )
             /****************/
             /* <game logic> */
             /****************/
+
+            // A few notes:
+            /*
+                I opted to not include a 'default' case and handle basic cell vector swapping once because, 
+                I wanted cells that had not been implemented yet to just disappear. Prevents me from possible
+                future headaches.
+            */
+
+
             ggCell oldCell( i->cellsScreen->at(t) );
 
             // if there already is a cell here, then skip this
@@ -65,12 +74,19 @@ void ggGame::tick( sf::Window* window )
             {
                 case CELL_STONE:
                     // does nothing.
+                    i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
                 break;
 
                 case CELL_WATER:
-                    // idk yet.
+                    // move right if space free.
+                    if ( ! (i->cellAt(oldCell.x+1, oldCell.y, CELL_STONE)) ) {
+                        i->addCell( ggCell(oldCell.x + 1, oldCell.y, oldCell.type) );
+                    } else {
+                        i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
+                    }
                 break;
             }
+
 
             /*****************/
             /* </game logic> */

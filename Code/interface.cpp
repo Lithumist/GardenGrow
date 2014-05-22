@@ -360,10 +360,31 @@ void ggInterface::loadInitialCellPattern() {
 
 int ggInterface::countCellsAt(int x, int y)
 {
-    return 0;
+    int count = 0;
+    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
+        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+        {
+            ++ count;
+        }
+    }
+    return count;
 }
 
-ggCell* ggInterface::cellAt(int x, int y)
+// Might want to rewrite this to make less wtf..
+ggCell* ggInterface::cellAt(int x, int y, ggCellType ty)
 {
+    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
+        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+        {
+            if ( ty == CELL_ANY ) {
+                return &(*cellsScreen)[c];
+            } else {
+                if ( (*cellsScreen)[c].type == ty ) {
+                    return &(*cellsScreen)[c];
+                }
+            }
+        }
+    }
+    // couldn't find any cell
     return NULL;
 }
