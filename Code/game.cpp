@@ -78,10 +78,9 @@ void ggGame::tick( sf::Window* window )
                 break;
 
                 case CELL_WATER:
-                    // move right if space free.
-                    if ( ! (i->cellAt(oldCell.x+1, oldCell.y, CELL_STONE)) ) {
-                        i->addCell( ggCell(oldCell.x + 1, oldCell.y, oldCell.type) );
-                    } else {
+                    // water survives if it's adjacent to at least 1 other water cell.
+                    if (i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 1)
+                    {
                         i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
                     }
                 break;

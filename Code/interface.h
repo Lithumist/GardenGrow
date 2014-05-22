@@ -87,6 +87,7 @@ public:
 
     int countCellsAt(int x, int y);
     ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY);
+    int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
 
 };
 

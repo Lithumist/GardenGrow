@@ -75,10 +75,10 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
         // adjust tile selection based on mouse wheel
         if ( e->type == sf::Event::MouseWheelMoved ) {
             selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
-            if ( selectedType < 0 ) {
+            if ( selectedType < 1 ) {
                 selectedType = CELL_SEED;
             }
-            if ( selectedType > 2 ) {
+            if ( selectedType > 3 ) {
                 selectedType = CELL_STONE;
             }
         }
@@ -371,6 +371,7 @@ int ggInterface::countCellsAt(int x, int y)
 }
 
 // Might want to rewrite this to make less wtf..
+// TODO -> Test when ty is default.
 ggCell* ggInterface::cellAt(int x, int y, ggCellType ty)
 {
     for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
@@ -387,4 +388,18 @@ ggCell* ggInterface::cellAt(int x, int y, ggCellType ty)
     }
     // couldn't find any cell
     return NULL;
+}
+
+int ggInterface::countCellsAdjacent(int x, int y, ggCellType ty)
+{
+    int count = 0;
+    if ( cellAt(x-1,y,ty) ) { ++ count; }
+    if ( cellAt(x+1,y,ty) ) { ++ count; }
+    if ( cellAt(x,y-1,ty) ) { ++ count; }
+    if ( cellAt(x,y+1,ty) ) { ++ count; }
+    if ( cellAt(x-1,y-1,ty) ) { ++ count; }
+    if ( cellAt(x-1,y+1,ty) ) { ++ count; }
+    if ( cellAt(x+1,y-1,ty) ) { ++ count; }
+    if ( cellAt(x+1,y+1,ty) ) { ++ count; }
+    return count;
 }
