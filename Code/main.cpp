@@ -11,6 +11,10 @@
 #include "interface.h"
 #include "editor.h"
 #include "game.h"
+#include <string>
+#include <iostream>
+#include <ctime>
+#include <sstream>
 
 int main()
 {
@@ -51,6 +55,22 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 gameWindow.close();
+            
+            // take screenshots.
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::S) {
+                    sf::Image screen = gameWindow.capture();
+                    std::string fname = "screenshots/";
+                    time_t now = time(0);
+                    tm* ltm = localtime(&now);
+                    std::stringstream ss;
+                    ss << ltm->tm_year << ltm->tm_mon+1 << ltm->tm_mday << " " << ltm->tm_hour << ltm->tm_min << ltm->tm_sec;
+                    fname += ss.str() + ".png";
+                    if ( screen.saveToFile( fname ) ) {
+                        std::cout << "Saved \"" + fname +"\"\n";
+                    }
+                }
+            }
             
             Interface.onEvent( &gameWindow, &event );
             Editor.onEvent( &gameWindow, &event );
