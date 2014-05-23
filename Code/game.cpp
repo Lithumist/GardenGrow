@@ -76,15 +76,19 @@ void ggGame::tick( sf::Window* window )
                 // tier type cells spawn the next tier if
                 // it has exactly 2 water tiles as its neighbour
                 // (other types don't matter)
-                if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) == 2 ) {
+                int adjWaterCells = i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER );
+                if ( adjWaterCells == 2 ) {
                     // determine the next tier cell type
                     // goes back to seed if current tier is a tree.
                     int newType = oldCell.type;
                     ++ newType;
-                    if ( newType >= 9 ) newType = 3;
+                    if ( newType >= 8 ) newType = 3;
                     i->addCell(ggCell( oldCell.x, oldCell.y, (ggCellType)newType ));
                 }
-                else if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 3 ) {
+                else if ( adjWaterCells >= 3 && adjWaterCells <= 7 ) {
+                    // cell dies if there's 3-7 water tiles as it's neighbour
+                }
+                else if ( adjWaterCells >= 8 ) {
                     // cell turns into water if there's too much water around it.
                     i->addCell(ggCell( oldCell.x, oldCell.y, CELL_WATER ));
                 }

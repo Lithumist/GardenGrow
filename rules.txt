@@ -8,4 +8,8 @@ Due to an abstraction leak I have to make sure that none of the rules are affect
 
 3) If a water cell has 0 water neighbours then it dies.
 
-4) If a cell has more than 2 water tiles as it's neighbour, then it turns into a water tile.
+4) If a cell has between 3-7 water tiles as it's neighbour, then it dies.
+
+5) If a cell has 8 water tiles as it's neighbour, then it turns into a water tile,
+
+TODO -> Need another rule to remove water tiles.
