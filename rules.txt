@@ -12,4 +12,18 @@ Due to an abstraction leak I have to make sure that none of the rules are affect
 
 5) If a cell has 8 water tiles as it's neighbour, then it turns into a water tile,
 
-TODO -> Need another rule to remove water tiles.
+
+
+Improvements needed:
+
+1) Need a way to 'use up' water tiles
+
+2) Need a system of movement.
+
+3) Need to alter tier upgrading to prevent constant cycling.
+
+
+Idea that addresses #1 and #3:
+When trees can upgrade, instead of turning back into a seed, they change the two water tiles adjacent to them into seeds
+
+Also, maybe tiered cells need to die if they have 0 water neighbours then it should die?
