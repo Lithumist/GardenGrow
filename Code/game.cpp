@@ -57,33 +57,41 @@ void ggGame::tick( sf::Window* window )
             /* <game logic> */
             /****************/
 
-            // A few notes:
-            /*
-                I opted to not include a 'default' case and handle basic cell vector swapping once because, 
-                I wanted cells that had not been implemented yet to just disappear. Prevents me from possible
-                future headaches.
-            */
-
-
             ggCell oldCell( i->cellsScreen->at(t) );
 
-            // if there already is a cell here, then skip this
-            // FIXME -> ugh...
 
-            switch( oldCell.type )
-            {
-                case CELL_STONE:
-                    // does nothing.
-                    i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
-                break;
+            if ( oldCell.type == CELL_STONE ) {
+                // does nothing at the moment.
+                i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
+            }
 
-                case CELL_WATER:
-                    // water survives if it's adjacent to at least 1 other water cell.
-                    if (i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 1)
-                    {
-                        i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
-                    }
-                break;
+            if ( oldCell.type == CELL_WATER ) {
+                // water survives if it's adjacent to at least 1 other water cell.
+                if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 1 ) {
+                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_WATER) );
+                }
+            }
+
+            if (oldCell.type >= 3 && oldCell.type <= 7 ) {
+                // tier type cells spawn the next tier if
+                // it has exactly 2 water tiles as its neighbour
+                // (other types don't matter)
+                if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) == 2 ) {
+                    // determine the next tier cell type
+                    // goes back to seed if current tier is a tree.
+                    int newType = oldCell.type;
+                    ++ newType;
+                    if ( newType >= 9 ) newType = 3;
+                    i->addCell(ggCell( oldCell.x, oldCell.y, (ggCellType)newType ));
+                }
+                else if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 3 ) {
+                    // cell turns into water if there's too much water around it.
+                    i->addCell(ggCell( oldCell.x, oldCell.y, CELL_WATER ));
+                }
+                else {
+                    // continue this tier cell to the next generation
+                    i->addCell(ggCell( oldCell.x, oldCell.y, oldCell.type ));
+                }
             }
 
 

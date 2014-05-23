@@ -44,16 +44,9 @@ void ggCell::draw( ggInterface* i , sf::RenderWindow* window  )
             i->drawCell( window, x, y, sf::Color( 255,64,64 ) );
         break;
 
-        case CELL_BABY:
-            i->drawCell( window, x, y, sf::Color( 255,255,64 ) );
-        break;
-
         case CELL_TREE:
-            i->drawCell( window, x, y, sf::Color( 160,130,64 ) );
+            i->drawCell( window, x, y, sf::Color( 130,100,34 ) );
         break;
 
-        case CELL_OAK:
-            i->drawCell( window, x, y, sf::Color( 32,32,255 ) );
-        break;
     }
 }
