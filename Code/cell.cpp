@@ -11,7 +11,8 @@ ggCell::ggCell() {
 ggCell::ggCell(int xgrid, int ygrid, ggCellType typ) :
  x      (xgrid),
  y      (ygrid),
- type   (typ)
+ type   (typ),
+ disable(false)
 {}
 
 

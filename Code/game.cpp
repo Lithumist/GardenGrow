@@ -65,7 +65,7 @@ void ggGame::tick( sf::Window* window )
                 i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
             }
 
-            if ( oldCell.type == CELL_WATER ) {
+            if ( oldCell.type == CELL_WATER && !oldCell.disable ) {
                 // water survives if it's adjacent to at least 1 other water cell.
                 if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 1 ) {
                     i->addCell( ggCell(oldCell.x, oldCell.y, CELL_WATER) );
@@ -89,7 +89,17 @@ void ggGame::tick( sf::Window* window )
                     else
                     {
                         // handle tree upgrade
-                        
+                        // add original tree
+                        i->addCell(ggCell( oldCell.x, oldCell.y, CELL_TREE ));
+                        // get pointers to the two water tiles
+                        std::array<ggCell*, 8> cellPtr;
+                        i->countCellsAdjacent( oldCell.x, oldCell.y, cellPtr, CELL_WATER );
+                        // spawn seeds in their place
+                        for ( unsigned int c=0; c<8; ++c ) {
+                            if ( cellPtr[c] == NULL || cellPtr[c]->disable ) continue;
+                            cellPtr[c]->disable = true;
+                            i->addCell(ggCell( cellPtr[c]->x, cellPtr[c]->y, CELL_SEED ));
+                        }
                     }
                 }
                 else if ( adjWaterCells >= 3 && adjWaterCells <= 7 ) {
