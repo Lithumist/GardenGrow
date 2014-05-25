@@ -400,13 +400,13 @@ int ggInterface::countCellsAdjacent(int x, int y, ggCellType ty)
 int ggInterface::countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty)
 {
     int count = 0;
-    if ( ptrList[0] = cellAt(x-1,y,ty) ) { ++ count; }
-    if ( ptrList[1] = cellAt(x+1,y,ty) ) { ++ count; }
-    if ( ptrList[2] = cellAt(x,y-1,ty) ) { ++ count; }
-    if ( ptrList[3] = cellAt(x,y+1,ty) ) { ++ count; }
-    if ( ptrList[4] = cellAt(x-1,y-1,ty) ) { ++ count; }
-    if ( ptrList[5] = cellAt(x-1,y+1,ty) ) { ++ count; }
-    if ( ptrList[6] = cellAt(x+1,y-1,ty) ) { ++ count; }
-    if ( ptrList[7] = cellAt(x+1,y+1,ty) ) { ++ count; }
+    if ( ptrList[0] = cellAt(x-1,y,ty) ) { if ( !ptrList[0]->disable ) ++ count; }
+    if ( ptrList[1] = cellAt(x+1,y,ty) ) { if ( !ptrList[1]->disable ) ++ count; }
+    if ( ptrList[2] = cellAt(x,y-1,ty) ) { if ( !ptrList[2]->disable ) ++ count; }
+    if ( ptrList[3] = cellAt(x,y+1,ty) ) { if ( !ptrList[3]->disable ) ++ count; }
+    if ( ptrList[4] = cellAt(x-1,y-1,ty) ) { if ( !ptrList[4]->disable ) ++ count; }
+    if ( ptrList[5] = cellAt(x-1,y+1,ty) ) { if ( !ptrList[5]->disable ) ++ count; }
+    if ( ptrList[6] = cellAt(x+1,y-1,ty) ) { if ( !ptrList[6]->disable ) ++ count; }
+    if ( ptrList[7] = cellAt(x+1,y+1,ty) ) { if ( !ptrList[7]->disable ) ++ count; }
     return count;
 }

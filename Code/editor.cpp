@@ -51,6 +51,7 @@ void ggEditor::tick( sf::Window* window )
         i->loadInitialCellPattern();
         *currentController = CTRL_GAME;
     }
+    if ( i->btnStop.doAction ) i->btnStop.doAction = false;
 }
 
 void ggEditor::draw( sf::RenderWindow* window )

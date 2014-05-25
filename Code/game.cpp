@@ -47,6 +47,7 @@ void ggGame::tick( sf::Window* window )
         i->btnStop.doAction = false;
         *currentController = CTRL_EDITOR;
     }
+    if ( i->btnPlay.doAction ) i->btnPlay.doAction = false;
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick )
     {
