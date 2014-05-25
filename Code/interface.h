@@ -8,6 +8,7 @@
 #include "button.h"
 #include "cell.h"
 #include <vector>
+#include <array>
 
 /*
     Declares a class for manipulating the 'editor-like' interface.
@@ -88,6 +89,7 @@ public:
     int countCellsAt(int x, int y);
     ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY);
     int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
+    int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);
 
 };
 

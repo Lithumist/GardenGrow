@@ -392,14 +392,21 @@ ggCell* ggInterface::cellAt(int x, int y, ggCellType ty)
 
 int ggInterface::countCellsAdjacent(int x, int y, ggCellType ty)
 {
+    // call the overload
+    std::array<ggCell*, 8> ptrListDefault;
+    return countCellsAdjacent( x , y , ptrListDefault , ty );
+}
+
+int ggInterface::countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty)
+{
     int count = 0;
-    if ( cellAt(x-1,y,ty) ) { ++ count; }
-    if ( cellAt(x+1,y,ty) ) { ++ count; }
-    if ( cellAt(x,y-1,ty) ) { ++ count; }
-    if ( cellAt(x,y+1,ty) ) { ++ count; }
-    if ( cellAt(x-1,y-1,ty) ) { ++ count; }
-    if ( cellAt(x-1,y+1,ty) ) { ++ count; }
-    if ( cellAt(x+1,y-1,ty) ) { ++ count; }
-    if ( cellAt(x+1,y+1,ty) ) { ++ count; }
+    if ( ptrList[0] = cellAt(x-1,y,ty) ) { ++ count; }
+    if ( ptrList[1] = cellAt(x+1,y,ty) ) { ++ count; }
+    if ( ptrList[2] = cellAt(x,y-1,ty) ) { ++ count; }
+    if ( ptrList[3] = cellAt(x,y+1,ty) ) { ++ count; }
+    if ( ptrList[4] = cellAt(x-1,y-1,ty) ) { ++ count; }
+    if ( ptrList[5] = cellAt(x-1,y+1,ty) ) { ++ count; }
+    if ( ptrList[6] = cellAt(x+1,y-1,ty) ) { ++ count; }
+    if ( ptrList[7] = cellAt(x+1,y+1,ty) ) { ++ count; }
     return count;
 }
