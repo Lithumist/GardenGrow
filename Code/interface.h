@@ -83,11 +83,12 @@ public:
 
     void addCell( ggCell cell );
     void addCellInitial( ggCell cell );
+    void delCellInitial( int x, int y );
     void loadInitialCellPattern();
     void flipCellBuffers();
 
     int countCellsAt(int x, int y);
-    ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY);
+    ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY, std::vector<ggCell>* vec=NULL);
     int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
     int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);
 

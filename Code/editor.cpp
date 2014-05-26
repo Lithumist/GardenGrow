@@ -34,6 +34,11 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
         if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
             // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
+            // delete cell under
+            ggCell* under = i->cellAt(gridLocation.x, gridLocation.y, CELL_ANY, i->cellsPattern);
+            if ( under ) {
+                i->delCellInitial(gridLocation.x, gridLocation.y);
+            }
             i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
         }
     }

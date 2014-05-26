@@ -344,6 +344,16 @@ void ggInterface::addCellInitial( ggCell cell ) {
     cellsInitial.push_back( cell );
 }
 
+void ggInterface::delCellInitial( int x, int y )
+{
+    for ( unsigned int c=0; c<cellsPattern->size(); ++c ) {
+        if ( (*cellsPattern)[c].x == x && (*cellsPattern)[c].y == y )
+        {
+            cellsPattern->erase( cellsPattern->begin()+c );
+        }
+    }
+}
+
 void ggInterface::loadInitialCellPattern() {
     // copy ready to start game
     cellsAlpha = cellsInitial;
@@ -372,16 +382,20 @@ int ggInterface::countCellsAt(int x, int y)
 
 // Might want to rewrite this to make less wtf..
 // TODO -> Test when ty is default.
-ggCell* ggInterface::cellAt(int x, int y, ggCellType ty)
+ggCell* ggInterface::cellAt(int x, int y, ggCellType ty, std::vector<ggCell>* vec)
 {
-    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
-        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+    if ( vec == NULL ) {
+        vec = cellsScreen;
+    }
+
+    for ( unsigned int c=0; c<vec->size(); ++c ) {
+        if ( (*vec)[c].x == x && (*vec)[c].y == y )
         {
             if ( ty == CELL_ANY ) {
-                return &(*cellsScreen)[c];
+                return &(*vec)[c];
             } else {
-                if ( (*cellsScreen)[c].type == ty ) {
-                    return &(*cellsScreen)[c];
+                if ( (*vec)[c].type == ty ) {
+                    return &(*vec)[c];
                 }
             }
         }

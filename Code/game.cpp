@@ -103,10 +103,7 @@ void ggGame::tick( sf::Window* window )
                         }
                     }
                 }
-                else if ( adjWaterCells >= 3 && adjWaterCells <= 7 ) {
-                    // cell dies if there's 3-7 water tiles as it's neighbour
-                }
-                else if ( adjWaterCells >= 8 ) {
+                else if ( adjWaterCells >= 3 ) {
                     // cell turns into water if there's too much water around it.
                     i->addCell(ggCell( oldCell.x, oldCell.y, CELL_WATER ));
                 }
