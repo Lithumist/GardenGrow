@@ -29,7 +29,7 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
         return;
     }
 
-    // create cells on mouse click.
+    // create cells on left click
     if ( e->type == sf::Event::MouseButtonPressed && e->mouseButton.button == sf::Mouse::Left ) {
         if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
@@ -40,6 +40,15 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
                 i->delCellInitial(gridLocation.x, gridLocation.y);
             }
             i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
+        }
+    }
+
+    // delete cells on right click
+    if ( e->type == sf::Event::MouseButtonPressed && e->mouseButton.button == sf::Mouse::Right ) {
+        if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
+            sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
+            // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
+            i->delCellInitial(gridLocation.x, gridLocation.y); // doesn't matter if cell doesn't exist
         }
     }
 }
