@@ -60,10 +60,22 @@ void ggGame::tick( sf::Window* window )
 
             ggCell oldCell( i->cellsScreen->at(t) );
 
-
-            if ( oldCell.type == CELL_STONE ) {
-                // does nothing at the moment.
+            // keep stationary cells where they are
+            if ( 
+                    oldCell.type == CELL_STONE ||
+                    oldCell.type == CELL_WATER
+               )
+            {
                 i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
+            }
+
+            if ( oldCell.type == CELL_SEED ) {
+                int adj_cells = i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER );
+                if ( adj_cells >= 1 ) {
+                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_FLOWER) );
+                } else {
+                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_SEED) );
+                }
             }
 
             
