@@ -66,52 +66,7 @@ void ggGame::tick( sf::Window* window )
                 i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
             }
 
-            if ( oldCell.type == CELL_WATER && !oldCell.disable ) {
-                // water survives if it's adjacent to at least 1 other water cell.
-                if ( i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER ) >= 1 ) {
-                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_WATER) );
-                }
-            }
-
-            if (oldCell.type >= 3 && oldCell.type <= 7 ) {
-                // tier type cells spawn the next tier if
-                // it has exactly 2 water tiles as its neighbour
-                // (other types don't matter)
-                int adjWaterCells = i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER );
-                if ( adjWaterCells == 2 ) {
-                    // try to determine the next tier cell type
-                    int newType = oldCell.type;
-                    ++ newType;
-                    if ( newType <= 7 )
-                    {
-                        // handle normal tier upgrade
-                        i->addCell(ggCell( oldCell.x, oldCell.y, (ggCellType)newType ));
-                    }
-                    else
-                    {
-                        // handle tree upgrade
-                        // add original tree
-                        i->addCell(ggCell( oldCell.x, oldCell.y, CELL_TREE ));
-                        // get pointers to the two water tiles
-                        std::array<ggCell*, 8> cellPtr;
-                        i->countCellsAdjacent( oldCell.x, oldCell.y, cellPtr, CELL_WATER );
-                        // spawn seeds in their place
-                        for ( unsigned int c=0; c<8; ++c ) {
-                            if ( cellPtr[c] == NULL || cellPtr[c]->disable ) continue;
-                            cellPtr[c]->disable = true;
-                            i->addCell(ggCell( cellPtr[c]->x, cellPtr[c]->y, CELL_SEED ));
-                        }
-                    }
-                }
-                else if ( adjWaterCells >= 3 ) {
-                    // cell turns into water if there's too much water around it.
-                    i->addCell(ggCell( oldCell.x, oldCell.y, CELL_WATER ));
-                }
-                else {
-                    // continue this tier cell to the next generation
-                    i->addCell(ggCell( oldCell.x, oldCell.y, oldCell.type ));
-                }
-            }
+            
 
 
             /*****************/

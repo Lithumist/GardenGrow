@@ -12,11 +12,12 @@ enum ggCellType             { CELL_ANY    = 0,
                               CELL_STONE  = 1, 
                               CELL_WATER  = 2, 
                               CELL_SEED   = 3, 
+                              CELL_FLOWER = 4, 
 
-                              CELL_SPROUT = 4, 
-                              CELL_PLANT  = 5, 
-                              CELL_FLOWER = 6, 
-                              CELL_TREE   = 7, 
+                              CELL_POWER  = 5, 
+                              CELL_PUSH   = 6, 
+                              CELL_SPIN   = 7, 
+                              CELL_WSPAWN = 8
                             };
 
 enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME };

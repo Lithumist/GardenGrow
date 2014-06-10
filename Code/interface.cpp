@@ -75,11 +75,14 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
         // adjust tile selection based on mouse wheel
         if ( e->type == sf::Event::MouseWheelMoved ) {
             selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
-            if ( selectedType < 1 ) {
-                selectedType = CELL_SEED;
-            }
-            if ( selectedType > 3 ) {
-                selectedType = CELL_STONE;
+            // Code to restrict cell choice.
+            while(0) {
+                if ( selectedType < 1 ) {
+                    selectedType = CELL_SEED;
+                }
+                if ( selectedType > 3 ) {
+                    selectedType = CELL_STONE;
+                }
             }
         }
     }
