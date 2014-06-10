@@ -2,6 +2,9 @@
 #include "cell.h"
 #include "interface.h"
 #include "types.h"
+#include <SFML/System.hpp>
+
+sf::Texture ggCell::txtCell;
 
 // Constructors
 ggCell::ggCell() {
@@ -15,27 +18,39 @@ ggCell::ggCell(int xgrid, int ygrid, ggCellType typ) :
  disable(false)
 {}
 
+void ggCell::loadTexture() {
+    txtCell.loadFromFile( "data/cell.png" );
+}
+
+void ggCell::drawTile( int index, sf::RenderWindow* window, ggInterface* i )
+{
+    sf::IntRect bounds;
+    bounds.left = (index % 10) * 20;
+    bounds.top = (index / 10) * 20;
+    bounds.width = 20;
+    bounds.height = 20;
+    sf::Sprite sprTile( txtCell, bounds );
+    sf::Vector2f pos = i->gridToWindow( (float)x , (float)y );
+    sprTile.setPosition( pos );
+    
+    window->draw( sprTile );
+
+}
+
 
 // Draw function
 void ggCell::draw( ggInterface* i , sf::RenderWindow* window  )
 {
-    switch ( type )
+    if       ( type >= 0 && type <= 3) // first few types
     {
-        case CELL_STONE:
-            i->drawCell( window, x, y, sf::Color( 96,96,96 ) );
-        break;
-
-        case CELL_WATER:
-            i->drawCell( window, x, y, sf::Color( 32,128,128 ) );
-        break;
-
-        case CELL_SEED:
-            i->drawCell( window, x, y, sf::Color( 230,128,128 ) );
-        break;
-
-        case CELL_FLOWER:
-            i->drawCell( window, x, y, sf::Color( 255,64,64 ) );
-        break;
-
+        drawTile( type, window, i );
+    }
+    else if  ( type == 4 ) // flowers
+    {
+        drawTile( 4 + (rand()%5), window, i );
+    }
+    else if  ( type >= 5 ) // last few types
+    {
+        drawTile( 5 + type, window, i );
     }
 }

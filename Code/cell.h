@@ -16,8 +16,15 @@ class ggInterface;
 class ggCell
 {
 private:
+    
+    // spritesheet texture
+    static sf::Texture txtCell;
+    void drawTile( int index, sf::RenderWindow* window, ggInterface* i );
 
 public:
+    // load the texture
+    static void loadTexture();
+
     // position (in grid coords)
     int x, y;
 

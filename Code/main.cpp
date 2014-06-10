@@ -18,6 +18,7 @@
 
 int main()
 {
+    srand( time(0) );
     sf::RenderWindow gameWindow( sf::VideoMode (GG_WINDOW_WIDTH,GG_WINDOW_HEIGHT) , GG_WINDOW_CAPTION , sf::Style::Titlebar | sf::Style::Close );
 
     // Pointer to whcih cell vector to render
@@ -30,6 +31,7 @@ int main()
     // Create interface
     ggInterface Interface;
     Interface.loadAssets();
+    ggCell::loadTexture();
     Interface.init();
 
     // Create controller variable
