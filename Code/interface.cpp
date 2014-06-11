@@ -343,6 +343,14 @@ void ggInterface::flipCellBuffers()
     cellsNext->clear();
 }
 
+void ggInterface::resetCellDelta()
+{
+    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
+        (*cellsScreen)[c].dx = 0;
+        (*cellsScreen)[c].dy = 0;
+    }
+}
+
 void ggInterface::addCellInitial( ggCell cell ) {
     cellsInitial.push_back( cell );
 }

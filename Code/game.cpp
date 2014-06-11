@@ -54,32 +54,10 @@ void ggGame::tick( sf::Window* window )
         std::cout << "Tick.\n";
         for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
         {
-            /****************/
-            /* <game logic> */
-            /****************/
-
+            // get old position
             ggCell oldCell( i->cellsScreen->at(t) );
 
-            // ##################### CHANGE ALL SHIT TO USE gx AND gy
-
-            // keep stationary cells where they are
-            if ( 
-                    oldCell.type == CELL_STONE ||
-                    oldCell.type == CELL_WATER
-               )
-            {
-                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
-            }
-
-            if ( oldCell.type == CELL_SEED ) {
-                int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
-                if ( adj_cells >= 1 ) {
-                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
-                } else {
-                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_SEED) );
-                }
-            }
-
+            // pusher
             if ( oldCell.type == CELL_PUSH ) {
                 // add the pusher
                 i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
@@ -106,6 +84,33 @@ void ggGame::tick( sf::Window* window )
                     std::cout << "u\n";
                 }
             }
+        }
+
+        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
+        {
+            // get old position
+            ggCell oldCell( i->cellsScreen->at(t) );
+
+            // keep stationary cells where they are
+            if ( 
+                    oldCell.type == CELL_STONE ||
+                    oldCell.type == CELL_WATER
+               )
+            {
+                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
+            }
+
+            // seeds
+            if ( oldCell.type == CELL_SEED ) {
+                int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
+                if ( adj_cells >= 1 ) {
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
+                } else {
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_SEED) );
+                }
+            }
+
+            
 
             
 
@@ -114,6 +119,7 @@ void ggGame::tick( sf::Window* window )
             /* </game logic> */
             /*****************/
         }
+        i->resetCellDelta();
         i->flipCellBuffers();
         tickTimer.restart();
     }

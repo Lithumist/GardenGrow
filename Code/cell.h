@@ -30,8 +30,8 @@ public:
 
     // displacement
     int dx, dy;
-    int gx(){ int t=dx; dx=0; return x+t; }
-    int gy(){ int t=dy; dy=0; return y+t; }
+    int gx(){ return x+dx; }
+    int gy(){ return y+dy; }
 
     // type
     ggCellType type;
