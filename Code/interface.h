@@ -86,6 +86,7 @@ public:
     void delCellInitial( int x, int y );
     void loadInitialCellPattern();
     void flipCellBuffers();
+    // void resetCellDelta();
 
     int countCellsAt(int x, int y);
     ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY, std::vector<ggCell>* vec=NULL);

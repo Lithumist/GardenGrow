@@ -28,6 +28,11 @@ public:
     // position (in grid coords)
     int x, y;
 
+    // displacement
+    int dx, dy;
+    int gx(){ int t=dx; dx=0; return x+t; }
+    int gy(){ int t=dy; dy=0; return y+t; }
+
     // type
     ggCellType type;
 

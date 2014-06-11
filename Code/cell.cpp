@@ -15,7 +15,9 @@ ggCell::ggCell(int xgrid, int ygrid, ggCellType typ) :
  x      (xgrid),
  y      (ygrid),
  type   (typ),
- disable(false)
+ disable(false),
+ dx     (0),
+ dy     (0)
 {}
 
 void ggCell::loadTexture() {
@@ -30,7 +32,7 @@ void ggCell::drawTile( int index, sf::RenderWindow* window, ggInterface* i )
     bounds.width = 20;
     bounds.height = 20;
     sf::Sprite sprTile( txtCell, bounds );
-    sf::Vector2f pos = i->gridToWindow( (float)x , (float)y );
+    sf::Vector2f pos = i->gridToWindow( (float)gx() , (float)gy() );
     sprTile.setPosition( pos );
     
     window->draw( sprTile );

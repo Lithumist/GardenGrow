@@ -60,21 +60,50 @@ void ggGame::tick( sf::Window* window )
 
             ggCell oldCell( i->cellsScreen->at(t) );
 
+            // ##################### CHANGE ALL SHIT TO USE gx AND gy
+
             // keep stationary cells where they are
             if ( 
                     oldCell.type == CELL_STONE ||
                     oldCell.type == CELL_WATER
                )
             {
-                i->addCell( ggCell(oldCell.x, oldCell.y, oldCell.type) );
+                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
             }
 
             if ( oldCell.type == CELL_SEED ) {
-                int adj_cells = i->countCellsAdjacent( oldCell.x, oldCell.y, CELL_WATER );
+                int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
                 if ( adj_cells >= 1 ) {
-                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_FLOWER) );
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
                 } else {
-                    i->addCell( ggCell(oldCell.x, oldCell.y, CELL_SEED) );
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_SEED) );
+                }
+            }
+
+            if ( oldCell.type == CELL_PUSH ) {
+                // add the pusher
+                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
+                // find cells adjacent
+                ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                // move them
+                if ( cellRight ) {
+                    cellRight->dx = 1;
+                    std::cout << "r\n";
+                }
+                if ( cellLeft ) {
+                    cellLeft->dx = -1;
+                    std::cout << "l\n";
+                }
+                if ( cellDown ) {
+                    cellDown->dy = 1;
+                    std::cout << "d\n";
+                }
+                if ( cellUp ) {
+                    cellUp->dy = -1;
+                    std::cout << "u\n";
                 }
             }
 
