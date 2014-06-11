@@ -61,23 +61,25 @@ void ggGame::tick( sf::Window* window )
             if ( oldCell.type == CELL_PUSH ) {
                 // add the pusher
                 i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
-                // find cells adjacent
-                ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
-                ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
-                ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
-                ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
-                // move them
-                if ( cellRight ) {
-                    cellRight->dx = 1;
-                }
-                if ( cellLeft ) {
-                    cellLeft->dx = -1;
-                }
-                if ( cellDown ) {
-                    cellDown->dy = 1;
-                }
-                if ( cellUp ) {
-                    cellUp->dy = -1;
+                {
+                    // find cells adjacent
+                    ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                    ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                    ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                    ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                    // move them
+                    if ( cellRight ) {
+                        cellRight->dx = 1;
+                    }
+                    if ( cellLeft ) {
+                        cellLeft->dx = -1;
+                    }
+                    if ( cellDown ) {
+                        cellDown->dy = 1;
+                    }
+                    if ( cellUp ) {
+                        cellUp->dy = -1;
+                    }
                 }
             }
 
@@ -85,27 +87,29 @@ void ggGame::tick( sf::Window* window )
             if ( oldCell.type == CELL_SPIN ) {
                 // add the spinner
                 i->addCell( ggCell(oldCell.x, oldCell.y, CELL_SPIN) );
-                // find cells adjacent
-                ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
-                ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
-                ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
-                ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
-                // rotate them
-                if ( cellRight ) {
-                    cellRight->dx = -1;
-                    cellRight->dy = 1;
-                }
-                if ( cellLeft ) {
-                    cellLeft->dx = 1;
-                    cellLeft->dy = -1;
-                }
-                if ( cellDown ) {
-                    cellDown->dx = -1;
-                    cellDown->dy = -1;
-                }
-                if ( cellUp ) {
-                    cellUp->dx = 1;
-                    cellUp->dy = 1;
+                {
+                    // find cells adjacent
+                    ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                    ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                    ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                    ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                    // rotate them
+                    if ( cellRight ) {
+                        cellRight->dx = -1;
+                        cellRight->dy = 1;
+                    }
+                    if ( cellLeft ) {
+                        cellLeft->dx = 1;
+                        cellLeft->dy = -1;
+                    }
+                    if ( cellDown ) {
+                        cellDown->dx = -1;
+                        cellDown->dy = -1;
+                    }
+                    if ( cellUp ) {
+                        cellUp->dx = 1;
+                        cellUp->dy = 1;
+                    }
                 }
             }
         }
@@ -117,11 +121,18 @@ void ggGame::tick( sf::Window* window )
 
             // keep stationary cells where they are
             if ( 
-                    oldCell.type == CELL_STONE ||
-                    oldCell.type == CELL_WATER
+                    oldCell.type == CELL_STONE   ||
+                    oldCell.type == CELL_WATER   ||
+                    oldCell.type == CELL_POWER_0
                )
             {
                 i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
+            }
+
+            // power blocks
+            if ( oldCell.type == CELL_POWER_1 ) {
+                // add the unactivated power cell
+                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_POWER_0) );
             }
 
             // seeds
