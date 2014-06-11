@@ -41,7 +41,9 @@ void ggCell::drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool
         px = i->panX;
         py = i->panY;
     }
-    sf::Vector2f pos = i->gridToWindow( (float)gx() - px , (float)gy() - py );
+    sf::Vector2f pos = i->gridToWindow( (float)gx() , (float)gy() );
+    pos.x -= px;
+    pos.y -= py;
     sprTile.setPosition( pos );
     
     window->draw( sprTile );
