@@ -324,7 +324,7 @@ void ggInterface::drawSelectedTile( sf::RenderWindow* window, int mx, int my )
     // create and draw cell
     sf::Vector2i g = windowToGrid( mx , my );
     ggCell cell(g.x,g.y,selectedType);
-    cell.draw( this , window );
+    cell.draw( this , window, true );
 }
 
 void ggInterface::addCell( ggCell cell ) {

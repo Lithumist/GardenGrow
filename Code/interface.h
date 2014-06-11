@@ -32,11 +32,6 @@ private:
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;
 
-    // zoom and pan variables
-    float zoomLevel;
-    float panX, panY;
-    float wheelSensitivity;
-
     // colours
     sf::Color colGrid;
     sf::Color colControlBackground;
@@ -55,6 +50,11 @@ public:
     std::vector<ggCell>* cellsScreen;
     std::vector<ggCell>* cellsNext;
     std::vector<ggCell>* cellsPattern;
+
+    // zoom and pan variables
+    float zoomLevel;
+    float panX, panY;
+    float wheelSensitivity;
 
     // tile placing variables and flags
     bool tileSelectorEnabled;

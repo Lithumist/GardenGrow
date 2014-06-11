@@ -19,7 +19,7 @@ private:
     
     // spritesheet texture
     static sf::Texture txtCell;
-    void drawTile( int index, sf::RenderWindow* window, ggInterface* i );
+    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool nopan = false);
 
 public:
     // load the texture
@@ -44,7 +44,7 @@ public:
     ggCell(int xgrid, int ygrid, ggCellType typ);
 
     // functions
-    void draw( ggInterface* i , sf::RenderWindow* window );
+    void draw( ggInterface* i , sf::RenderWindow* window , bool nopan = false );
 
 };
 
