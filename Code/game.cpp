@@ -123,16 +123,11 @@ void ggGame::tick( sf::Window* window )
             if ( 
                     oldCell.type == CELL_STONE   ||
                     oldCell.type == CELL_WATER   ||
-                    oldCell.type == CELL_POWER_0
+                    oldCell.type == CELL_POWER   ||
+                    oldCell.type == CELL_DEAD
                )
             {
                 i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
-            }
-
-            // power blocks
-            if ( oldCell.type == CELL_POWER_1 ) {
-                // add the unactivated power cell
-                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_POWER_0) );
             }
 
             // seeds
@@ -142,6 +137,16 @@ void ggGame::tick( sf::Window* window )
                     i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
                 } else {
                     i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_SEED) );
+                }
+            }
+
+            // flowers
+            if ( oldCell.type == CELL_FLOWER ) {
+                int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
+                if ( adj_cells >= 1 ) {
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
+                } else {
+                    i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_DEAD) );
                 }
             }
 

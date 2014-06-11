@@ -62,12 +62,8 @@ void ggCell::draw( ggInterface* i , sf::RenderWindow* window , bool nopan )
     {
         drawTile( 4 + (rand()%5), window, i, nopan );
     }
-    else if  ( type == 5 || type == 6 ) // power
+    else if  ( type >= 5 ) // other types
     {
-        drawTile( 10, window, i, nopan );
-    }
-    else if  ( type >= 7 ) // last few types
-    {
-        drawTile( 4 + type, window, i, nopan );
+        drawTile( 5+type, window, i, nopan );
     }
 }
