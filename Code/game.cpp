@@ -80,6 +80,34 @@ void ggGame::tick( sf::Window* window )
                     cellUp->dy = -1;
                 }
             }
+
+            // spinner
+            if ( oldCell.type == CELL_SPIN ) {
+                // add the spinner
+                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_SPIN) );
+                // find cells adjacent
+                ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                // rotate them
+                if ( cellRight ) {
+                    cellRight->dx = -1;
+                    cellRight->dy = 1;
+                }
+                if ( cellLeft ) {
+                    cellLeft->dx = 1;
+                    cellLeft->dy = -1;
+                }
+                if ( cellDown ) {
+                    cellDown->dx = -1;
+                    cellDown->dy = -1;
+                }
+                if ( cellUp ) {
+                    cellUp->dx = 1;
+                    cellUp->dy = 1;
+                }
+            }
         }
 
         for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
