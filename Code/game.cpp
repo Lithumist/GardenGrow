@@ -69,19 +69,15 @@ void ggGame::tick( sf::Window* window )
                 // move them
                 if ( cellRight ) {
                     cellRight->dx = 1;
-                    std::cout << "r\n";
                 }
                 if ( cellLeft ) {
                     cellLeft->dx = -1;
-                    std::cout << "l\n";
                 }
                 if ( cellDown ) {
                     cellDown->dy = 1;
-                    std::cout << "d\n";
                 }
                 if ( cellUp ) {
                     cellUp->dy = -1;
-                    std::cout << "u\n";
                 }
             }
         }
