@@ -14,7 +14,7 @@ enum ggCellType             { CELL_ANY     = 0,
                               CELL_SEED    = 3, 
                               CELL_FLOWER  = 4, 
 
-                              CELL_POWER = 5, 
+                              CELL_POWER   = 5, 
                               CELL_PUSH    = 6, 
                               CELL_SPIN    = 7, 
                               CELL_WSPAWN  = 8,
