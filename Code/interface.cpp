@@ -19,7 +19,7 @@ ggInterface::ggInterface()
     cellsPattern = &cellsInitial;
     btnResetEnabled = false;
     tileSelectorEnabled = false;
-    selectedType = CELL_STONE;
+    selectedType = CELL_SEED;
 }
 
 bool ggInterface::loadAssets()
@@ -75,15 +75,21 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
         // adjust tile selection based on mouse wheel
         if ( e->type == sf::Event::MouseWheelMoved ) {
             selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
+            #ifdef GG_RESTRICT_CELL_SELECT
             // Code to restrict cell choice.
-            while(0) {
-                if ( selectedType < 1 ) {
-                    selectedType = CELL_SEED;
-                }
-                if ( selectedType > 3 ) {
-                    selectedType = CELL_STONE;
-                }
+            if ( selectedType == 4 && e->mouseWheel.delta == 1 ) {
+                selectedType = CELL_PUSH;
             }
+            if ( selectedType == 5 && e->mouseWheel.delta == -1 ) {
+                selectedType = CELL_SEED;
+            }
+            if ( selectedType > 8 ) {
+                selectedType = CELL_SEED;
+            }
+            if ( selectedType < 3 ) {
+                selectedType = CELL_WSPAWN;
+            }
+            #endif
         }
     }
 
