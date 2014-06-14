@@ -52,7 +52,6 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick )
     {
-        out("Tick.\n");
         for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
         {
             // get old position
@@ -186,6 +185,9 @@ void ggGame::tick( sf::Window* window )
             /* </game logic> */
             /*****************/
         }
+        out("Tick ");
+        out(uint_to_string( (unsigned int)i->cellsNext->size() ));
+        out(".\n");
         i->resetCellDelta();
         i->flipCellBuffers();
         tickTimer.restart();
