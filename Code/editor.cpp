@@ -1,6 +1,7 @@
 // Part of GardenGrow.
 #include "editor.h"
 #include <iostream>
+#include "funcs.h"
 
 ggEditor::ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl )
 {
@@ -13,11 +14,13 @@ ggEditor::ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl )
 
     i = in;
     currentController = cur_ctrl;
+    wspawn_count = 0;
+    seed_count = 0;
 }
 
 void ggEditor::onControl()
 {
-    std::cout << "Editor in control now.\n";
+    out("Editor in control now.\n");
     // Modify interface options
     i->btnResetEnabled = true;
     i->tileSelectorEnabled = true;
@@ -39,7 +42,16 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
             if ( under ) {
                 i->delCellInitial(gridLocation.x, gridLocation.y);
             }
-            i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
+            if ( i->selectedType == CELL_WSPAWN && wspawn_count >= GG_WSPAWN_MAX ) {
+                out("You can only place 1 water spawner!\n");
+            } else if ( i->selectedType == CELL_SEED && seed_count >= 20 ) {
+                out( "You can only place 20 seeds!\n");
+            } else {
+                i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
+            }
+            if ( i->selectedType == CELL_WSPAWN )   ++ wspawn_count;
+            if ( i->selectedType == CELL_SEED )     ++ seed_count;
+            
         }
     }
 
@@ -66,6 +78,11 @@ void ggEditor::tick( sf::Window* window )
         *currentController = CTRL_GAME;
     }
     if ( i->btnStop.doAction ) i->btnStop.doAction = false;
+    if ( i->btnReset.doAction ) {
+        wspawn_count = 0;
+        seed_count = 0;
+        i->btnReset.doAction = false;
+    }
 }
 
 void ggEditor::draw( sf::RenderWindow* window )

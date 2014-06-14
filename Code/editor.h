@@ -17,6 +17,9 @@ private:
     // interface pointer
     ggInterface* i;
     ggInterfaceController* currentController;
+
+    int wspawn_count;
+    int seed_count;
 public:
     // constructor
     ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl );

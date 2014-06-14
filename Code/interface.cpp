@@ -145,9 +145,12 @@ void ggInterface::tick(sf::Window* window)
         gridVisible = !gridVisible;
     }
     if ( btnReset.doAction ) {
-        btnReset.doAction = false;
+        // bad hack, ggEditor does some other logic and sets the doAction flag false again.
+        //btnReset.doAction = false;
         if ( btnResetEnabled ) {
             cellsPattern->clear();
+        } else {
+            btnReset.doAction = false;
         }
     }
     /*

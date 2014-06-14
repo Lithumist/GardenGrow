@@ -1,5 +1,6 @@
 // Part of GardenGrow.
 #include "game.h"
+#include "funcs.h"
 #include <iostream>
 
 ggGame::ggGame( ggInterface* in , ggInterfaceController* cur_ctrl )
@@ -19,7 +20,7 @@ ggGame::ggGame( ggInterface* in , ggInterfaceController* cur_ctrl )
 
 void ggGame::onControl()
 {
-    std::cout << "Game in control now.\n";
+    out("Game in control now.\n");
 
     // Modify interface options
     i->btnResetEnabled = false;
@@ -51,7 +52,7 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick )
     {
-        std::cout << "Tick.\n";
+        out("Tick.\n");
         for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
         {
             // get old position
@@ -109,6 +110,32 @@ void ggGame::tick( sf::Window* window )
                     if ( cellUp ) {
                         cellUp->dx = 1;
                         cellUp->dy = 1;
+                    }
+                }
+            }
+
+            // water fountain
+            if ( oldCell.type == CELL_WSPAWN ) {
+                // add the fountain
+                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_WSPAWN) );
+                {
+                    // find cells adjacent
+                    ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                    ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                    ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                    ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                    // rotate them
+                    if ( !cellRight ) {
+                        i->addCell( ggCell(oldCell.x + 1, oldCell.y, CELL_WATER) );
+                    }
+                    if ( !cellLeft ) {
+                        i->addCell( ggCell(oldCell.x - 1, oldCell.y, CELL_WATER) );
+                    }
+                    if ( !cellDown ) {
+                        i->addCell( ggCell(oldCell.x, oldCell.y + 1, CELL_WATER) );
+                    }
+                    if ( !cellUp ) {
+                        i->addCell( ggCell(oldCell.x, oldCell.y - 1, CELL_WATER) );
                     }
                 }
             }

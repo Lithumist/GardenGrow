@@ -22,4 +22,7 @@
 #define GG_DEFAULT_TICK_TIME 0.2f 
 // GG_DEFAULT_TICK_TIME is in seconds.
 
+#define GG_WSPAWN_MAX 1
+#define GG_SEED_MAX 20
+
 #endif

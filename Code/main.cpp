@@ -11,6 +11,7 @@
 #include "interface.h"
 #include "editor.h"
 #include "game.h"
+#include "funcs.h"
 #include <string>
 #include <iostream>
 #include <ctime>
@@ -69,7 +70,7 @@ int main()
                     ss << ltm->tm_year << ltm->tm_mon+1 << ltm->tm_mday << " " << ltm->tm_hour << ltm->tm_min << ltm->tm_sec;
                     fname += ss.str() + ".png";
                     if ( screen.saveToFile( fname ) ) {
-                        std::cout << "Saved \"" + fname +"\"\n";
+                        out("Saved \"" + fname + "\"\n");
                     }
                 }
             }
