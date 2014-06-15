@@ -28,4 +28,10 @@
 #define GG_RESTRICT_CELL_SELECT
 // comment out for debug mode where you can palce all cell types
 
+#define GG_BYTES_PER_CELL 12
+// number of bytes needed per
+
+#define GG_INT_CODE 5000
+// ammount to add onto numbers before they're serialised to look better as an image 
+
 #endif
