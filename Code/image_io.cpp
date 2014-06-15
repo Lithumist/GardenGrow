@@ -17,7 +17,7 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
     // calculate the image size needed
     unsigned int dimWidth = 128;
     unsigned int hlpBytesNeeded = GG_BYTES_PER_CELL*argCells.size();
-    unsigned int dimHeight = 17 + (hlpBytesNeeded/4)/128;
+    unsigned int dimHeight = 18 + (hlpBytesNeeded/4)/128;
     out("height is " + std::to_string( dimHeight ));
 
     // load template header
