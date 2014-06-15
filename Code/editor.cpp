@@ -89,6 +89,11 @@ void ggEditor::tick( sf::Window* window )
         // TODO -> call winapi functions to get filename
         save_as_image( "patterns/default.png", *i->cellsPattern );
     }
+    if ( i->btnLoad.doAction ) {
+        i->btnLoad.doAction = false;
+        // TODO -> Figure out how to update seed and fountain count after loading
+        load_from_image( "patterns/default.png", *i->cellsPattern );
+    }
 }
 
 void ggEditor::draw( sf::RenderWindow* window )
