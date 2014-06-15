@@ -86,38 +86,37 @@ bool load_from_image ( std::string argFilename, std::vector<ggCell>& argVector )
     argVector.clear();
 
     // prepare for reading
-    unsigned int x = 0;
-    unsigned int y = 16;
-    bool swapOrder = false;
+    unsigned int posX = 0;
+    unsigned int posY = 16;
+    bool flagSwapOrder = false;
 
     // read byte order
-    int bom = pixel_to_int( imgPattern.getPixel(x,y), false );
-    increment(x,y);
-    if ( bom == GG_BOM_WRONG ) {
-        swapOrder = true;
+    int inBom = pixel_to_int( imgPattern.getPixel( posX, posY ), false );
+    increment( posX, posY );
+    if ( inBom == GG_BOM_WRONG ) {
+        flagSwapOrder = true;
     }
 
     // read cell count
-    unsigned int numCells = pixel_to_int( imgPattern.getPixel(x,y), false );
-    increment(x,y);
+    unsigned int numCells = pixel_to_int( imgPattern.getPixel( posX, posY ), false );
+    increment( posX, posY );
 
     // read all cells into vector
     for ( unsigned int index = 0; index < numCells; ++index ) {
         // read in values
-        int xpos = 0;
-        int ypos = 0;
-        int type = 0;
-        xpos = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
-        increment(x,y);
-        ypos = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
-        increment(x,y);
-        type = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
-        increment(x,y);
+        int inX = 0;
+        int inY = 0;
+        int inType = 0;
+        inX = pixel_to_int( imgPattern.getPixel( posX, posY ), flagSwapOrder );
+        increment( posX, posY );
+        inY = pixel_to_int( imgPattern.getPixel( posX, posY ), flagSwapOrder );
+        increment( posX, posY );
+        inType = pixel_to_int( imgPattern.getPixel( posX, posY ), flagSwapOrder );
+        increment( posX, posY );
         // construct and add cell
-        ggCell cellNew( xpos, ypos, (ggCellType)type );
+        ggCell cellNew( inX, inY, (ggCellType)inType );
         argVector.push_back( cellNew );
     }
-
     return true;
 }
 
