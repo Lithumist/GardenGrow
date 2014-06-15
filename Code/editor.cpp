@@ -2,6 +2,7 @@
 #include "editor.h"
 #include <iostream>
 #include "funcs.h"
+#include "image_io.h"
 
 ggEditor::ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl )
 {
@@ -82,6 +83,11 @@ void ggEditor::tick( sf::Window* window )
         wspawn_count = 0;
         seed_count = 0;
         i->btnReset.doAction = false;
+    }
+    if ( i->btnSave.doAction ) {
+        i->btnSave.doAction = false;
+        // TODO -> call winapi functions to get filename
+        save_as_image( "patterns/default.png", *i->cellsPattern );
     }
 }
 

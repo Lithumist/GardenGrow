@@ -163,9 +163,6 @@ void ggInterface::tick(sf::Window* window)
     if ( btnPause.doAction ) {
         btnPause.doAction = false;
     }
-    if ( btnSave.doAction ) {
-        btnSave.doAction = false;
-    }
     if ( btnLoad.doAction ) {
         btnLoad.doAction = false;
     }

@@ -46,83 +46,9 @@ int main()
 
     // Create game
     ggGame Game( &Interface , &Control );
-
-    // test image saving function
-    std::vector<ggCell> testCells;
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(4,3,CELL_WATER) ); testCells.push_back( ggCell(4,3,CELL_WATER) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    testCells.push_back( ggCell(46,22,CELL_WSPAWN) ); testCells.push_back( ggCell(46,22,CELL_WSPAWN) );
-    save_as_image( "testicles.png", testCells );
-
     
     // test int-pixel conversion functions
+    while ( 0 ) {
     out("\nInput Num: 1996\n");
     sf::Color col;
     int inNum = 1996;
@@ -133,10 +59,7 @@ int main()
     out("a: " + std::to_string(col.a) + "\n");
     int outNum = pixel_to_int( col, false );
     out("Output Num: " + std::to_string(outNum) + "\n");
-    
-
-
-
+    }
 
     // Game loop
     while (gameWindow.isOpen())
