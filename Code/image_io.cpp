@@ -59,11 +59,11 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
         increment( posX, posY );
         // output colours used
         out("[" + std::to_string(index) + "] ");
-        out("X: ( " + std::to_string(colX.r) + ", " + std::to_string(colX.g) + ", " + std::to_string(colX.b) + ", " + std::to_string(colX.a) + " )\n");
+        out("X    : ( " + std::to_string(colX.r) + ", " + std::to_string(colX.g) + ", " + std::to_string(colX.b) + ", " + std::to_string(colX.a) + " )\n");
         out("[" + std::to_string(index) + "] ");
-        out("X: ( " + std::to_string(colY.r) + ", " + std::to_string(colY.g) + ", " + std::to_string(colY.b) + ", " + std::to_string(colY.a) + " )\n");
+        out("Y    : ( " + std::to_string(colY.r) + ", " + std::to_string(colY.g) + ", " + std::to_string(colY.b) + ", " + std::to_string(colY.a) + " )\n");
         out("[" + std::to_string(index) + "] ");
-        out("X: ( " + std::to_string(colType.r) + ", " + std::to_string(colType.g) + ", " + std::to_string(colType.b) + ", " + std::to_string(colType.a) + " )\n");
+        out("Type : ( " + std::to_string(colType.r) + ", " + std::to_string(colType.g) + ", " + std::to_string(colType.b) + ", " + std::to_string(colType.a) + " )\n");
     }
 
     // save image
