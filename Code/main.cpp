@@ -13,6 +13,7 @@
 #include "game.h"
 #include "funcs.h"
 #include "image_io.h"
+#include "file_dialog.h"
 #include <string>
 #include <iostream>
 #include <ctime>
@@ -59,6 +60,12 @@ int main()
     out("a: " + std::to_string(col.a) + "\n");
     int outNum = pixel_to_int( col, false );
     out("Output Num: " + std::to_string(outNum) + "\n");
+    }
+
+    // test file dialog function
+    while( 0 ) {
+    std::string path = pop_file_dialog( DIALOG_SAVE, "\\patterns\\", gameWindow.getSystemHandle() );
+    out("path=" + path + "\n");
     }
 
     // Game loop
