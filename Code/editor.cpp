@@ -3,6 +3,7 @@
 #include <iostream>
 #include "funcs.h"
 #include "image_io.h"
+#include "file_dialog.h"
 
 ggEditor::ggEditor( ggInterface* in , ggInterfaceController* cur_ctrl )
 {
@@ -86,13 +87,17 @@ void ggEditor::tick( sf::Window* window )
     }
     if ( i->btnSave.doAction ) {
         i->btnSave.doAction = false;
-        // TODO -> call winapi functions to get filename
-        save_as_image( "patterns/default.png", *i->cellsPattern );
+        std::string pathFileName = pop_file_dialog( DIALOG_SAVE, "\\patterns\\", window->getSystemHandle() );
+        save_as_image( pathFileName, *i->cellsPattern );
     }
     if ( i->btnLoad.doAction ) {
         i->btnLoad.doAction = false;
         // TODO -> Figure out how to update seed and fountain count after loading
-        load_from_image( "patterns/default.png", *i->cellsPattern );
+        std::string pathFileName = pop_file_dialog( DIALOG_OPEN, "\\patterns\\", window->getSystemHandle() );
+        load_from_image( pathFileName, *i->cellsPattern );
+        i->panX = 0.0f;
+        i->panY = 0.0f;
+        i->zoomLevel = 1.0f;
     }
 }
 

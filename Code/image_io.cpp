@@ -22,7 +22,7 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
 
     // load template header
     sf::Image imgHeader;
-    if ( !imgHeader.loadFromFile("data/pattern_header.png") ) {
+    if ( !imgHeader.loadFromFile("../data/pattern_header.png") ) {
         return false;
     }
 
