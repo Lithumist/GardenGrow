@@ -32,9 +32,19 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
     imgPattern.create( dimWidth, dimHeight, sf::Color(0,0,0));
     imgPattern.copy( imgHeader, 0, 0 );
 
-    // write all pixels
+    // prepare for writing
     unsigned int x = 0;
     unsigned int y = 16;
+
+    // write byte order marking
+    imgPattern.setPixel( x, y, int_to_pixel( GG_BOM ) );
+    increment(x,y);
+
+    // write cell count
+    imgPattern.setPixel( x, y, int_to_pixel( argCells.size() ) );
+    increment(x,y);
+
+    // write all pixels
     for ( unsigned int index=0; index<argCells.size(); ++index ) {
         // gen colours
         sf::Color colX, colY, colType;
@@ -65,6 +75,51 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
 
 bool load_from_image ( std::string argFilename, std::vector<ggCell>& argVector )
 {
+    // constructs a vector of ggCells from an image file
+
+    // open image file
+    sf::Image imgPattern;
+    if ( !imgPattern.loadFromFile( argFilename ) ) {
+        return false;
+    }
+
+    // prepare vector
+    argVector.clear();
+
+    // prepare for reading
+    unsigned int x = 0;
+    unsigned int y = 16;
+    bool swapOrder = false;
+
+    // read byte order
+    int bom = pixel_to_int( imgPattern.getPixel(x,y), false );
+    increment(x,y);
+    if ( bom == GG_BOM_WRONG ) {
+        swapOrder = true;
+    }
+
+    // read cell count
+    unsigned int numCells = pixel_to_int( imgPattern.getPixel(x,y), false );
+    increment(x,y);
+
+    // read all cells into vector
+    for ( unsigned int index = 0; index < numCells; ++index ) {
+        // read in values
+        int xpos = 0;
+        int ypos = 0;
+        int type = 0;
+        xpos = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
+        increment(x,y);
+        ypos = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
+        increment(x,y);
+        type = pixel_to_int( imgPattern.getPixel(x,y), swapOrder );
+        increment(x,y);
+        // construct and add cell
+        ggCell cellNew( xpos, ypos, (ggCellType)type );
+        argVector.push_back( cellNew );
+    }
+
+    return true;
 }
 
 sf::Color int_to_pixel( int number ) {
