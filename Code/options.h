@@ -34,4 +34,7 @@
 #define GG_INT_CODE 5000
 // ammount to add onto numbers before they're serialised to look better as an image 
 
+#define GG_BOM 0xff000000
+#define GG_BOM_WRONG 0x000000ff
+
 #endif
