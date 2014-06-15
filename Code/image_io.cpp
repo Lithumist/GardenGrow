@@ -12,14 +12,13 @@
 bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
 {
     // saves a vector of cells as an image.
-
     // could pack more into each pixel but it's not necessary
 
     // calculate the image size needed
     unsigned int dimWidth = 128;
     unsigned int hlpBytesNeeded = GG_BYTES_PER_CELL*argCells.size();
     unsigned int dimHeight = 17 + (hlpBytesNeeded/4)/128;
-    out("height is " + uint_to_string(dimHeight));
+    out("height is " + std::to_string( dimHeight ));
 
     // load template header
     sf::Image imgHeader;
@@ -33,31 +32,31 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
     imgPattern.copy( imgHeader, 0, 0 );
 
     // prepare for writing
-    unsigned int x = 0;
-    unsigned int y = 16;
+    unsigned int posX = 0;
+    unsigned int posY = 16;
 
     // write byte order marking
-    imgPattern.setPixel( x, y, int_to_pixel( GG_BOM ) );
-    increment(x,y);
+    imgPattern.setPixel( posX, posY, int_to_pixel( GG_BOM ) );
+    increment( posX, posY );
 
     // write cell count
-    imgPattern.setPixel( x, y, int_to_pixel( argCells.size() ) );
-    increment(x,y);
+    imgPattern.setPixel( posX, posY, int_to_pixel( argCells.size() ) );
+    increment( posX, posY );
 
     // write all pixels
     for ( unsigned int index=0; index<argCells.size(); ++index ) {
-        // gen colours
+        // generate colours
         sf::Color colX, colY, colType;
         colX = int_to_pixel( argCells[index].x );
         colY = int_to_pixel( argCells[index].y );
         colType = int_to_pixel( argCells[index].type );
         // write to image
-        imgPattern.setPixel( x, y, colX );
-        increment(x,y);
-        imgPattern.setPixel( x, y, colY );
-        increment(x,y);
-        imgPattern.setPixel( x, y, colType );
-        increment(x,y);
+        imgPattern.setPixel( posX, posY, colX );
+        increment( posX, posY );
+        imgPattern.setPixel( posX, posY, colY );
+        increment( posX, posY );
+        imgPattern.setPixel( posX, posY, colType );
+        increment( posX, posY );
         // output colours used
         out("[" + std::to_string(index) + "] ");
         out("X: ( " + std::to_string(colX.r) + ", " + std::to_string(colX.g) + ", " + std::to_string(colX.b) + ", " + std::to_string(colX.a) + " )\n");
