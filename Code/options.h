@@ -7,6 +7,10 @@
     Declares program option macros.
 */
 
+// PLATFORM
+#define GG_WINDOWS
+// I'll add more if/when I support them
+
 #define GG_WINDOW_WIDTH 800
 #define GG_WINDOW_HEIGHT 600
 #define GG_WINDOW_CAPTION "Garden Grow"
