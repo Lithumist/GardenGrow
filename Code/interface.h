@@ -93,6 +93,8 @@ public:
     int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
     int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);
 
+    void handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount=0 );
+
 };
 
 #endif

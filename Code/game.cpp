@@ -47,6 +47,7 @@ void ggGame::tick( sf::Window* window )
     // Hand control to editor if stop button pressed
     if ( i->btnStop.doAction ) {
         i->btnStop.doAction = false;
+        flagPaused = false;
         *currentController = CTRL_EDITOR;
     }
     if ( i->btnPlay.doAction ) {
@@ -84,17 +85,21 @@ void ggGame::tick( sf::Window* window )
                     ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
                     ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
                     // move them
-                    if ( cellRight ) {
+                    if ( cellRight && isMovable(*cellRight) ) {
                         cellRight->dx = 1;
+                        i->handleOverlap( cellRight, 1, 0 );
                     }
-                    if ( cellLeft ) {
+                    if ( cellLeft && isMovable(*cellLeft) ) {
                         cellLeft->dx = -1;
+                        i->handleOverlap( cellLeft, -1, 0 );
                     }
-                    if ( cellDown ) {
+                    if ( cellDown && isMovable(*cellDown) ) {
                         cellDown->dy = 1;
+                        i->handleOverlap( cellDown, 0, 1 );
                     }
-                    if ( cellUp ) {
+                    if ( cellUp && isMovable(*cellUp) ) {
                         cellUp->dy = -1;
+                        i->handleOverlap( cellUp, 0, -1 );
                     }
                 }
             }
@@ -110,29 +115,48 @@ void ggGame::tick( sf::Window* window )
                     ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
                     ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
                     // rotate them
-                    if ( cellRight ) {
+                    if ( cellRight && isMovable(*cellRight) ) {
                         cellRight->dx = -1;
                         cellRight->dy = 1;
                     }
-                    if ( cellLeft ) {
+                    if ( cellLeft && isMovable(*cellLeft) ) {
                         cellLeft->dx = 1;
                         cellLeft->dy = -1;
                     }
-                    if ( cellDown ) {
+                    if ( cellDown && isMovable(*cellDown) ) {
                         cellDown->dx = -1;
                         cellDown->dy = -1;
                     }
-                    if ( cellUp ) {
+                    if ( cellUp && isMovable(*cellUp) ) {
                         cellUp->dx = 1;
                         cellUp->dy = 1;
                     }
                 }
             }
 
+            
+        }
+
+        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
+        {
+            // get old position
+            ggCell oldCell( i->cellsScreen->at(t) );
+
+            // keep stationary cells where they are
+            if ( 
+                    oldCell.type == CELL_STONE   ||
+                    oldCell.type == CELL_WATER   ||
+                    oldCell.type == CELL_POWER   ||
+                    oldCell.type == CELL_DEAD
+               )
+            {
+                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
+            }
+
             // water fountain
             if ( oldCell.type == CELL_WSPAWN ) {
                 // add the fountain
-                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_WSPAWN) );
+                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_WSPAWN) );
                 {
                     // find cells adjacent
                     ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
@@ -153,23 +177,6 @@ void ggGame::tick( sf::Window* window )
                         i->addCell( ggCell(oldCell.x, oldCell.y - 1, CELL_WATER) );
                     }
                 }
-            }
-        }
-
-        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
-        {
-            // get old position
-            ggCell oldCell( i->cellsScreen->at(t) );
-
-            // keep stationary cells where they are
-            if ( 
-                    oldCell.type == CELL_STONE   ||
-                    oldCell.type == CELL_WATER   ||
-                    oldCell.type == CELL_POWER   ||
-                    oldCell.type == CELL_DEAD
-               )
-            {
-                i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
             }
 
             // seeds
@@ -217,4 +224,11 @@ void ggGame::draw( sf::RenderWindow* window )
     }
 
     // nothing atm.
+}
+
+bool ggGame::isMovable( ggCell& argCell )
+{
+    if ( argCell.type == CELL_PUSH ) return false;
+    if ( argCell.type == CELL_SPIN ) return false;
+    return true;
 }

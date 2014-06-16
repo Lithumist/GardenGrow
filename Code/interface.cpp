@@ -445,3 +445,16 @@ int ggInterface::countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrLis
     if ( ptrList[7] = cellAt(x+1,y+1,ty) ) { if ( !ptrList[7]->disable ) ++ count; }
     return count;
 }
+
+void ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount )
+{
+    ggCell* cellUnder = cellAt( argTop->gx(), argTop->gy() );
+    if ( cellUnder ) {
+        cellUnder->dx = argDx;
+        cellUnder->dy = argDy;
+        ++ argCount;
+        if ( argCount <= GG_MAX_CELL_DISPLACEMENT_CHAIN ) {
+            handleOverlap( cellUnder, argDx, argDy, argCount );
+        }
+    }
+}
