@@ -63,7 +63,7 @@ public:
     // buttons
     ggButton btnPlay, btnPause, btnStop;
     ggButton btnSave, btnLoad, btnReset;
-    ggButton btnGrid;
+    ggButton btnGrid, btnCentre;
     bool btnResetEnabled;
 
     // functions

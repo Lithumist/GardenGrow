@@ -54,6 +54,9 @@ void ggInterface::init()
 
     btnGrid.init( sf::IntRect(0,40,20,20) , sf::IntRect(0,60,20,20) , &txtBtnControl );
     btnGrid.setPosition( 296 , 5 );
+
+    btnCentre.init( sf::IntRect(20,40,20,20) , sf::IntRect(20,60,20,20) , &txtBtnControl );
+    btnCentre.setPosition( 366 , 5 );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
@@ -132,6 +135,7 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
     btnLoad.onEvent( window, e );
     btnReset.onEvent( window, e );
     btnGrid.onEvent( window, e );
+    btnCentre.onEvent( window, e );
 }
 
 void ggInterface::tick(sf::Window* window)
@@ -144,6 +148,7 @@ void ggInterface::tick(sf::Window* window)
     btnLoad.tick(window);
     btnReset.tick(window);
     btnGrid.tick(window);
+    btnCentre.tick(window);
 
     // handle interface only buttons
     if ( btnGrid.doAction ) {
@@ -158,6 +163,12 @@ void ggInterface::tick(sf::Window* window)
         } else {
             btnReset.doAction = false;
         }
+    }
+    if ( btnCentre.doAction ) {
+        btnCentre.doAction = false;
+        zoomLevel = 1.0f;
+        panX = 0.0f;
+        panY = 0.0f;
     }
     /*
     if ( btnPause.doAction ) {
@@ -248,6 +259,7 @@ void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVect
     window->draw( btnLoad );
     window->draw( btnReset );
     window->draw( btnGrid );
+    window->draw( btnCentre );
 }
 
 
