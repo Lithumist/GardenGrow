@@ -80,6 +80,7 @@ void ggEditor::tick( sf::Window* window )
         *currentController = CTRL_GAME;
     }
     if ( i->btnStop.doAction ) i->btnStop.doAction = false;
+    if ( i->btnPause.doAction ) i->btnPause.doAction = false;
     if ( i->btnReset.doAction ) {
         wspawn_count = 0;
         seed_count = 0;

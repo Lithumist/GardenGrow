@@ -56,6 +56,8 @@ void ggGame::tick( sf::Window* window )
             out("Game unpaused.");
         }
     }
+    if ( i->btnSave.doAction ) i->btnSave.doAction = false;
+    if ( i->btnLoad.doAction ) i->btnLoad.doAction = false;
 
     if ( i->btnPause.doAction ) {
         i->btnPause.doAction = false;
