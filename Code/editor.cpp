@@ -88,16 +88,20 @@ void ggEditor::tick( sf::Window* window )
     if ( i->btnSave.doAction ) {
         i->btnSave.doAction = false;
         std::string pathFileName = pop_file_dialog( DIALOG_SAVE, "\\patterns\\", window->getSystemHandle() );
-        save_as_image( pathFileName, *i->cellsPattern );
+        if ( pathFileName != "" ) {
+            save_as_image( pathFileName, *i->cellsPattern );
+        }
     }
     if ( i->btnLoad.doAction ) {
         i->btnLoad.doAction = false;
         // TODO -> Figure out how to update seed and fountain count after loading
         std::string pathFileName = pop_file_dialog( DIALOG_OPEN, "\\patterns\\", window->getSystemHandle() );
-        load_from_image( pathFileName, *i->cellsPattern );
-        i->panX = 0.0f;
-        i->panY = 0.0f;
-        i->zoomLevel = 1.0f;
+        if ( pathFileName != "" ) {
+            load_from_image( pathFileName, *i->cellsPattern );
+            i->panX = 0.0f;
+            i->panY = 0.0f;
+            i->zoomLevel = 1.0f;
+        }
     }
 }
 
