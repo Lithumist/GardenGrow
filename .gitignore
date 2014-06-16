@@ -1,5 +1,8 @@
 # unwanted directories
-GardenGrow/
+GardenGrow/Debug
+GardenGrow/Release
+GardenGrow/GardenGrow.opensdf
+GardenGrow/GardenGrow.sdf
 
 # unwanted file types
-# blank
+*.v11.suo

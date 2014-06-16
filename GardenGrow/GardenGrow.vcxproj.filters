@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{c4da99ad-0b5c-4361-a3f1-eebe1f73542e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{f10c3ff6-29dc-4ad6-9782-8920dfdde0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\types and settings">
+      <UniqueIdentifier>{974445a4-9ef6-4192-9fce-65d2b4931579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game logic">
+      <UniqueIdentifier>{32cd996e-561c-480a-ae0b-ec7b48889433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\types and settings">
+      <UniqueIdentifier>{d922e78c-ba37-4610-9859-1cec514a32a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game logic">
+      <UniqueIdentifier>{517d4a87-3540-416c-9dd5-0fb7ddbd6c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\multiplayer">
+      <UniqueIdentifier>{a15d0afc-db50-462d-8515-d1747d44fcfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\multiplayer">
+      <UniqueIdentifier>{60cce4dd-f984-4270-a534-53d86f1be277}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Code\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\button.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\cell.cpp">
+      <Filter>Source Files\types and settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\editor.cpp">
+      <Filter>Source Files\game logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\funcs.cpp">
+      <Filter>Source Files\types and settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\game.cpp">
+      <Filter>Source Files\game logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\interface.cpp">
+      <Filter>Source Files\game logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\image_io.cpp">
+      <Filter>Source Files\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\file_dialog_win.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Code\button.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\options.h">
+      <Filter>Header Files\types and settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\types.h">
+      <Filter>Header Files\types and settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\funcs.h">
+      <Filter>Header Files\types and settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\cell.h">
+      <Filter>Header Files\types and settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\editor.h">
+      <Filter>Header Files\game logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\game.h">
+      <Filter>Header Files\game logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\interface.h">
+      <Filter>Header Files\game logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\image_io.h">
+      <Filter>Header Files\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\file_dialog.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
