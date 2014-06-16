@@ -74,36 +74,6 @@ void ggGame::tick( sf::Window* window )
             // get old position
             ggCell oldCell( i->cellsScreen->at(t) );
 
-            // pusher
-            if ( oldCell.type == CELL_PUSH ) {
-                // add the pusher
-                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
-                {
-                    // find cells adjacent
-                    ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
-                    ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
-                    ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
-                    ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
-                    // move them
-                    if ( cellRight && isMovable(*cellRight) ) {
-                        cellRight->dx = 1;
-                        i->handleOverlap( cellRight, 1, 0 );
-                    }
-                    if ( cellLeft && isMovable(*cellLeft) ) {
-                        cellLeft->dx = -1;
-                        i->handleOverlap( cellLeft, -1, 0 );
-                    }
-                    if ( cellDown && isMovable(*cellDown) ) {
-                        cellDown->dy = 1;
-                        i->handleOverlap( cellDown, 0, 1 );
-                    }
-                    if ( cellUp && isMovable(*cellUp) ) {
-                        cellUp->dy = -1;
-                        i->handleOverlap( cellUp, 0, -1 );
-                    }
-                }
-            }
-
             // spinner
             if ( oldCell.type == CELL_SPIN ) {
                 // add the spinner
@@ -115,21 +85,51 @@ void ggGame::tick( sf::Window* window )
                     ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
                     ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
                     // rotate them
-                    if ( cellRight && isMovable(*cellRight) ) {
+                    if ( cellRight && i->isMovable(*cellRight) ) {
                         cellRight->dx = -1;
                         cellRight->dy = 1;
                     }
-                    if ( cellLeft && isMovable(*cellLeft) ) {
+                    if ( cellLeft && i->isMovable(*cellLeft) ) {
                         cellLeft->dx = 1;
                         cellLeft->dy = -1;
                     }
-                    if ( cellDown && isMovable(*cellDown) ) {
+                    if ( cellDown && i->isMovable(*cellDown) ) {
                         cellDown->dx = -1;
                         cellDown->dy = -1;
                     }
-                    if ( cellUp && isMovable(*cellUp) ) {
+                    if ( cellUp && i->isMovable(*cellUp) ) {
                         cellUp->dx = 1;
                         cellUp->dy = 1;
+                    }
+                }
+            }
+
+            // pusher
+            if ( oldCell.type == CELL_PUSH ) {
+                // add the pusher
+                i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
+                {
+                    // find cells adjacent
+                    ggCell* cellRight = i->cellAt( oldCell.x + 1, oldCell.y     );
+                    ggCell* cellLeft  = i->cellAt( oldCell.x - 1, oldCell.y     );
+                    ggCell* cellDown  = i->cellAt( oldCell.x    , oldCell.y + 1 );
+                    ggCell* cellUp    = i->cellAt( oldCell.x    , oldCell.y - 1 );
+                    // move them
+                    if ( cellRight && i->isMovable(*cellRight) ) {
+                        cellRight->dx = 1;
+                        i->handleOverlap( cellRight, 1, 0 );
+                    }
+                    if ( cellLeft && i->isMovable(*cellLeft) ) {
+                        cellLeft->dx = -1;
+                        i->handleOverlap( cellLeft, -1, 0 );
+                    }
+                    if ( cellDown && i->isMovable(*cellDown) ) {
+                        cellDown->dy = 1;
+                        i->handleOverlap( cellDown, 0, 1 );
+                    }
+                    if ( cellUp && i->isMovable(*cellUp) ) {
+                        cellUp->dy = -1;
+                        i->handleOverlap( cellUp, 0, -1 );
                     }
                 }
             }
@@ -224,11 +224,4 @@ void ggGame::draw( sf::RenderWindow* window )
     }
 
     // nothing atm.
-}
-
-bool ggGame::isMovable( ggCell& argCell )
-{
-    if ( argCell.type == CELL_PUSH ) return false;
-    if ( argCell.type == CELL_SPIN ) return false;
-    return true;
 }
