@@ -20,6 +20,7 @@ private:
 
     // timing
     sf::Clock tickTimer;
+    bool flagPaused;
 public:
     // timing
     sf::Time timeForOneTick;

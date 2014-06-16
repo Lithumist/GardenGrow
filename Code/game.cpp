@@ -16,6 +16,7 @@ ggGame::ggGame( ggInterface* in , ggInterfaceController* cur_ctrl )
     currentController = cur_ctrl;
 
     timeForOneTick = sf::seconds( GG_DEFAULT_TICK_TIME );
+    flagPaused = false;
 }
 
 void ggGame::onControl()
@@ -48,9 +49,22 @@ void ggGame::tick( sf::Window* window )
         i->btnStop.doAction = false;
         *currentController = CTRL_EDITOR;
     }
-    if ( i->btnPlay.doAction ) i->btnPlay.doAction = false;
+    if ( i->btnPlay.doAction ) {
+        i->btnPlay.doAction = false;
+        if ( flagPaused ) {
+            flagPaused = false;
+            out("Game unpaused.");
+        }
+    }
 
-    if ( tickTimer.getElapsedTime() >= timeForOneTick )
+    if ( i->btnPause.doAction ) {
+        i->btnPause.doAction = false;
+        flagPaused = !flagPaused;
+        // output
+        flagPaused ? out("Game paused.") : out("Game unpaused.");
+    }
+
+    if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
         for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
         {

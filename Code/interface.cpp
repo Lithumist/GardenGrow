@@ -170,11 +170,6 @@ void ggInterface::tick(sf::Window* window)
         panX = 0.0f;
         panY = 0.0f;
     }
-    /*
-    if ( btnPause.doAction ) {
-        btnPause.doAction = false;
-    }
-    */
 }
 
 
