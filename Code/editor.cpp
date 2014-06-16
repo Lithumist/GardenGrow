@@ -98,6 +98,7 @@ void ggEditor::tick( sf::Window* window )
         std::string pathFileName = pop_file_dialog( DIALOG_OPEN, "\\patterns\\", window->getSystemHandle() );
         if ( pathFileName != "" ) {
             load_from_image( pathFileName, *i->cellsPattern );
+            updateCount();
             i->panX = 0.0f;
             i->panY = 0.0f;
             i->zoomLevel = 1.0f;
@@ -112,4 +113,18 @@ void ggEditor::draw( sf::RenderWindow* window )
     }
 
     // nothing atm.
+}
+
+void ggEditor::updateCount()
+{
+    wspawn_count = 0;
+    seed_count = 0;
+    for ( unsigned int index=0; index<i->cellsPattern->size(); ++index ) {
+        if ( (*i->cellsPattern)[ index ].type == CELL_WSPAWN ) {
+            ++ wspawn_count;
+        }
+        if ( (*i->cellsPattern)[ index ].type == CELL_SEED ) {
+            ++ seed_count;
+        }
+    }
 }

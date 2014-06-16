@@ -29,6 +29,7 @@ public:
     void onEvent( sf::Window* window , sf::Event* e );
     void tick( sf::Window* window );
     void draw( sf::RenderWindow* window ); // draw any overlay
+    void updateCount(); // updates specific block counts.
 };
 
 #endif
