@@ -53,10 +53,10 @@ void ggInterface::init()
     btnReset.setPosition( 228 , 5 );
 
     btnGrid.init( sf::IntRect(0,40,20,20) , sf::IntRect(0,60,20,20) , &txtBtnControl );
-    btnGrid.setPosition( 296 , 5 );
+    btnGrid.setPosition( 298 , 5 );
 
     btnCentre.init( sf::IntRect(20,40,20,20) , sf::IntRect(20,60,20,20) , &txtBtnControl );
-    btnCentre.setPosition( 366 , 5 );
+    btnCentre.setPosition( 322 , 5 );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
