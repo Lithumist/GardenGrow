@@ -401,6 +401,17 @@ int ggInterface::countCellsAt(int x, int y)
     return count;
 }
 
+void ggInterface::deleteCellsAt(int x, int y)
+{
+    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
+        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+        {
+            (*cellsScreen)[c].del = true;
+        }
+    }
+
+}
+
 // Might want to rewrite this to make less wtf..
 // TODO -> Test when ty is default.
 ggCell* ggInterface::cellAt(int x, int y, ggCellType ty, std::vector<ggCell>* vec)
@@ -455,7 +466,7 @@ bool ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned 
         return false;
     }
     if ( cellUnder ) {
-        if ( argCount <= GG_MAX_CELL_DISPLACEMENT_CHAIN ) {
+        if ( argCount <= GG_MAX_CELL_DISPLACEMENT_CHAIN /* && !cellUnder->full */ ) {
             cellUnder->dx = argDx;
             cellUnder->dy = argDy;
             ++ argCount;
@@ -477,5 +488,6 @@ bool ggInterface::isMovable( ggCell& argCell )
 {
     if ( argCell.type == CELL_PUSH ) return false;
     if ( argCell.type == CELL_SPIN ) return false;
+    if ( argCell.full ) return false;
     return true;
 }

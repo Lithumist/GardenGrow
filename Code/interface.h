@@ -89,6 +89,7 @@ public:
     void resetCellDelta();
 
     int countCellsAt(int x, int y);
+    void deleteCellsAt(int x, int y);
     ggCell* cellAt(int x, int y, ggCellType ty=CELL_ANY, std::vector<ggCell>* vec=NULL);
     int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
     int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);

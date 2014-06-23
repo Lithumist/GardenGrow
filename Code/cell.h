@@ -28,6 +28,12 @@ public:
     // position (in grid coords)
     int x, y;
 
+    // full flag
+    bool full;
+
+    // delete flag
+    bool del;
+
     // displacement
     int dx, dy;
     int gx(){ return x+dx; }

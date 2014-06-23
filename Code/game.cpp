@@ -75,7 +75,7 @@ void ggGame::tick( sf::Window* window )
             ggCell oldCell( i->cellsScreen->at(t) );
 
             // spinner
-            if ( oldCell.type == CELL_SPIN ) {
+            if ( oldCell.type == CELL_SPIN && !oldCell.del ) {
                 // add the spinner
                 i->addCell( ggCell(oldCell.x, oldCell.y, CELL_SPIN) );
                 {
@@ -105,7 +105,7 @@ void ggGame::tick( sf::Window* window )
             }
 
             // pusher
-            if ( oldCell.type == CELL_PUSH ) {
+            if ( oldCell.type == CELL_PUSH && !oldCell.del ) {
                 // add the pusher
                 i->addCell( ggCell(oldCell.x, oldCell.y, CELL_PUSH) );
                 {
@@ -117,19 +117,27 @@ void ggGame::tick( sf::Window* window )
                     // move them
                     if ( cellRight && i->isMovable(*cellRight) ) {
                         cellRight->dx = 1;
-                        i->handleOverlap( cellRight, 1, 0 );
+                        if ( !i->handleOverlap( cellRight, 1, 0 ) ) {
+                            cellRight->full = true;
+                        }
                     }
                     if ( cellLeft && i->isMovable(*cellLeft) ) {
                         cellLeft->dx = -1;
-                        i->handleOverlap( cellLeft, -1, 0 );
+                        if ( !i->handleOverlap( cellLeft, -1, 0 ) ) {
+                            cellLeft->full = true;
+                        }
                     }
                     if ( cellDown && i->isMovable(*cellDown) ) {
                         cellDown->dy = 1;
-                        i->handleOverlap( cellDown, 0, 1 );
+                        if ( !i->handleOverlap( cellDown, 0, 1 ) ) {
+                            cellDown->full = true;
+                        }
                     }
                     if ( cellUp && i->isMovable(*cellUp) ) {
                         cellUp->dy = -1;
-                        i->handleOverlap( cellUp, 0, -1 );
+                        if ( !i->handleOverlap( cellUp, 0, -1 ) ) {
+                            cellUp->full = true;
+                        }
                     }
                 }
             }
@@ -148,13 +156,14 @@ void ggGame::tick( sf::Window* window )
                     oldCell.type == CELL_WATER   ||
                     oldCell.type == CELL_POWER   ||
                     oldCell.type == CELL_DEAD
+                    && !oldCell.del 
                )
             {
                 i->addCell( ggCell(oldCell.gx(), oldCell.gy(), oldCell.type) );
             }
 
             // water fountain
-            if ( oldCell.type == CELL_WSPAWN ) {
+            if ( oldCell.type == CELL_WSPAWN && !oldCell.del ) {
                 // add the fountain
                 i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_WSPAWN) );
                 {
@@ -180,7 +189,7 @@ void ggGame::tick( sf::Window* window )
             }
 
             // seeds
-            if ( oldCell.type == CELL_SEED ) {
+            if ( oldCell.type == CELL_SEED && !oldCell.del ) {
                 int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
                 if ( adj_cells >= 1 ) {
                     i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );
@@ -190,7 +199,7 @@ void ggGame::tick( sf::Window* window )
             }
 
             // flowers
-            if ( oldCell.type == CELL_FLOWER ) {
+            if ( oldCell.type == CELL_FLOWER && !oldCell.del ) {
                 int adj_cells = i->countCellsAdjacent( oldCell.gx(), oldCell.gy(), CELL_WATER );
                 if ( adj_cells >= 1 ) {
                     i->addCell( ggCell(oldCell.gx(), oldCell.gy(), CELL_FLOWER) );

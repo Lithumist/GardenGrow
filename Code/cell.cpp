@@ -17,7 +17,9 @@ ggCell::ggCell(int xgrid, int ygrid, ggCellType typ) :
  type   (typ),
  disable(false),
  dx     (0),
- dy     (0)
+ dy     (0),
+ full   (false),
+ del    (false)
 {}
 
 void ggCell::loadTexture() {
