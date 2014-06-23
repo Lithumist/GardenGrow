@@ -116,9 +116,9 @@ int main()
 
         // decide whcih cell vector to draw
         if ( Control == CTRL_EDITOR ) {
-            cr = Interface.cellsPattern;
+            cr = &Interface.cellsInitial;
         } else if ( Control == CTRL_GAME ) {
-            cr = Interface.cellsScreen;
+            cr = &Interface.cellsCurrent;
         }
 
         // draw

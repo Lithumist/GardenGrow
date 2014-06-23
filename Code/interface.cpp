@@ -14,9 +14,6 @@ ggInterface::ggInterface()
     colGrid.a=              128; colGrid.r=              255; colGrid.g=              255; colGrid.b=             255;
     colControlBackground.a= 255; colControlBackground.r= 128; colControlBackground.g= 64; colControlBackground.b= 255;
     wheelSensitivity = GG_MOUSEWHEEL_ZOOM_SENSITIVITY;
-    cellsNext = &cellsAlpha;
-    cellsScreen = &cellsBeta;
-    cellsPattern = &cellsInitial;
     btnResetEnabled = false;
     tileSelectorEnabled = false;
     selectedType = CELL_SEED;
@@ -159,7 +156,7 @@ void ggInterface::tick(sf::Window* window)
         // bad hack, ggEditor does some other logic and sets the doAction flag false again.
         //btnReset.doAction = false;
         if ( btnResetEnabled ) {
-            cellsPattern->clear();
+            cellsInitial.clear();
         } else {
             btnReset.doAction = false;
         }
@@ -338,27 +335,24 @@ void ggInterface::drawSelectedTile( sf::RenderWindow* window, int mx, int my )
 }
 
 void ggInterface::addCell( ggCell cell ) {
-    cellsNext->push_back( cell );
+    cellsUpdated.push_back( cell );
 }
 
 void ggInterface::flipCellBuffers()
 {
-    // No xor to be found here...
-    // swap the pointers
-    std::vector<ggCell>* temp = cellsScreen;
-    cellsScreen = cellsNext;
-    cellsNext = temp;
-
-    // clear the vector that will be shown next
-    cellsNext->clear();
+    cellsCurrent.clear();
+    cellsCurrent = cellsUpdated;
+    cellsUpdated.clear();
 }
 
 void ggInterface::resetCellDelta()
 {
+    /*
     for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
         (*cellsScreen)[c].dx = 0;
         (*cellsScreen)[c].dy = 0;
     }
+    */
 }
 
 void ggInterface::addCellInitial( ggCell cell ) {
@@ -367,21 +361,17 @@ void ggInterface::addCellInitial( ggCell cell ) {
 
 void ggInterface::delCellInitial( int x, int y )
 {
-    for ( unsigned int c=0; c<cellsPattern->size(); ++c ) {
-        if ( (*cellsPattern)[c].x == x && (*cellsPattern)[c].y == y )
+    for ( unsigned int c=0; c<cellsInitial.size(); ++c ) {
+        if ( cellsInitial[c].x == x && cellsInitial[c].y == y )
         {
-            cellsPattern->erase( cellsPattern->begin()+c );
+            cellsInitial.erase( cellsInitial.begin() + c );
         }
     }
 }
 
 void ggInterface::loadInitialCellPattern() {
     // copy ready to start game
-    cellsAlpha = cellsInitial;
-    cellsBeta.clear();
-
-    cellsNext = &cellsBeta;
-    cellsScreen = &cellsAlpha;
+    cellsCurrent = cellsInitial;
 }
 
 
@@ -392,8 +382,8 @@ void ggInterface::loadInitialCellPattern() {
 int ggInterface::countCellsAt(int x, int y)
 {
     int count = 0;
-    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
-        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+    for ( unsigned int c=0; c<cellsCurrent.size(); ++c ) {
+        if ( cellsCurrent[c].x == x && cellsCurrent[c].y == y )
         {
             ++ count;
         }
@@ -403,10 +393,10 @@ int ggInterface::countCellsAt(int x, int y)
 
 void ggInterface::deleteCellsAt(int x, int y)
 {
-    for ( unsigned int c=0; c<cellsScreen->size(); ++c ) {
-        if ( (*cellsScreen)[c].x == x && (*cellsScreen)[c].y == y )
+    for ( unsigned int c=0; c<cellsCurrent.size(); ++c ) {
+        if ( cellsCurrent[c].x == x && cellsCurrent[c].y == y )
         {
-            (*cellsScreen)[c].del = true;
+            cellsCurrent[c].del = true;
         }
     }
 
@@ -417,7 +407,7 @@ void ggInterface::deleteCellsAt(int x, int y)
 ggCell* ggInterface::cellAt(int x, int y, ggCellType ty, std::vector<ggCell>* vec)
 {
     if ( vec == NULL ) {
-        vec = cellsScreen;
+        vec = &cellsCurrent;
     }
 
     for ( unsigned int c=0; c<vec->size(); ++c ) {

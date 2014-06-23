@@ -40,7 +40,7 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
             // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
             // delete cell under
-            ggCell* under = i->cellAt(gridLocation.x, gridLocation.y, CELL_ANY, i->cellsPattern);
+            ggCell* under = i->cellAt(gridLocation.x, gridLocation.y, CELL_ANY, &i->cellsInitial);
             if ( under ) {
                 i->delCellInitial(gridLocation.x, gridLocation.y);
             }
@@ -90,7 +90,7 @@ void ggEditor::tick( sf::Window* window )
         i->btnSave.doAction = false;
         std::string pathFileName = pop_file_dialog( DIALOG_SAVE, "\\patterns\\", window->getSystemHandle() );
         if ( pathFileName != "" ) {
-            save_as_image( pathFileName, *i->cellsPattern );
+            save_as_image( pathFileName, i->cellsInitial );
         }
     }
     if ( i->btnLoad.doAction ) {
@@ -98,7 +98,7 @@ void ggEditor::tick( sf::Window* window )
         // TODO -> Figure out how to update seed and fountain count after loading
         std::string pathFileName = pop_file_dialog( DIALOG_OPEN, "\\patterns\\", window->getSystemHandle() );
         if ( pathFileName != "" ) {
-            load_from_image( pathFileName, *i->cellsPattern );
+            load_from_image( pathFileName, i->cellsInitial );
             updateCount();
             i->panX = 0.0f;
             i->panY = 0.0f;
@@ -120,11 +120,11 @@ void ggEditor::updateCount()
 {
     wspawn_count = 0;
     seed_count = 0;
-    for ( unsigned int index=0; index<i->cellsPattern->size(); ++index ) {
-        if ( (*i->cellsPattern)[ index ].type == CELL_WSPAWN ) {
+    for ( unsigned int index=0; index<i->cellsInitial.size(); ++index ) {
+        if ( i->cellsInitial[ index ].type == CELL_WSPAWN ) {
             ++ wspawn_count;
         }
-        if ( (*i->cellsPattern)[ index ].type == CELL_SEED ) {
+        if ( i->cellsInitial[ index ].type == CELL_SEED ) {
             ++ seed_count;
         }
     }

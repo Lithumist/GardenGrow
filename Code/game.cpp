@@ -69,10 +69,10 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
-        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
+        for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             // get old position
-            ggCell oldCell( i->cellsScreen->at(t) );
+            ggCell oldCell( i->cellsCurrent[t] );
 
             // spinner
             if ( oldCell.type == CELL_SPIN && !oldCell.del ) {
@@ -145,10 +145,10 @@ void ggGame::tick( sf::Window* window )
             
         }
 
-        for ( unsigned int t=0; t<i->cellsScreen->size(); ++t )
+        for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             // get old position
-            ggCell oldCell( i->cellsScreen->at(t) );
+            ggCell oldCell( i->cellsCurrent[t] );
 
             // keep stationary cells where they are
             if ( 
@@ -218,7 +218,7 @@ void ggGame::tick( sf::Window* window )
             /*****************/
         }
         out("Tick ");
-        out(uint_to_string( (unsigned int)i->cellsNext->size() ));
+        out(uint_to_string( (unsigned int)i->cellsCurrent.size() ));
         out(".\n");
         i->resetCellDelta();
         i->flipCellBuffers();

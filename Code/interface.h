@@ -23,11 +23,6 @@ private:
     // assets
     sf::Texture txtBtnControl;
 
-    // cell list
-    std::vector<ggCell> cellsAlpha;
-    std::vector<ggCell> cellsBeta;
-    std::vector<ggCell> cellsInitial;
-
     // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;
@@ -46,10 +41,10 @@ private:
     void drawSelectedTile( sf::RenderWindow* window, int mx, int my );
 
 public:
-    // cells list pointers
-    std::vector<ggCell>* cellsScreen;
-    std::vector<ggCell>* cellsNext;
-    std::vector<ggCell>* cellsPattern;
+    // cell list
+    std::vector<ggCell> cellsCurrent;
+    std::vector<ggCell> cellsUpdated;
+    std::vector<ggCell> cellsInitial;
 
     // zoom and pan variables
     float zoomLevel;
