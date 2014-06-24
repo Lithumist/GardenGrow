@@ -21,7 +21,8 @@ ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
  dx     (0),
  dy     (0),
  full   (false),
- del    (false)
+ del    (false),
+ AffectCount(0)
 {}
 
 void ggCell::loadTexture() {

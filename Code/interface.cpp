@@ -411,7 +411,7 @@ ggCell* ggInterface::cellAt(int x, int y, ggCellType ty, std::vector<ggCell>* ve
     }
 
     for ( unsigned int c=0; c<vec->size(); ++c ) {
-        if ( (*vec)[c].x == x && (*vec)[c].y == y )
+        if ( (*vec)[c].get_cur_pos_x() == x && (*vec)[c].get_cur_pos_y() == y )
         {
             if ( ty == CELL_ANY ) {
                 return &(*vec)[c];

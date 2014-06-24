@@ -72,7 +72,13 @@ void ggGame::tick( sf::Window* window )
         // TODO -> handle water cells somehow
         // TODO -> handle AffectCount >= 1 cells not disapearing
 
-        // first pass through the old cells
+        // first pass though old cells
+        // reset AffectCount
+        for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t ) {
+            i->cellsCurrent[ t ].AffectCount = 0;
+        }
+
+        // second pass through the old cells
         // determine how many cells will affect each cell
         // also calculates the new positions (applied in second pass if AffectCount <= 1)
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
@@ -133,7 +139,7 @@ void ggGame::tick( sf::Window* window )
             }
         }
 
-        // second pass through the old cells
+        // third pass through the old cells
         // add cells with new positions to updated vector
         // only if AffectCount <= 1
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
@@ -142,6 +148,10 @@ void ggGame::tick( sf::Window* window )
 
             if ( oldCell.AffectCount <= 1 ) {
                 i->cellsUpdated.push_back( ggCell( oldCell.get_new_pos_x(), oldCell.get_new_pos_y(), oldCell.type ) );
+            } else 
+            {
+                out( "jam " + std::to_string( oldCell.AffectCount ) + "\n" );
+                i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x(), oldCell.get_cur_pos_y(), oldCell.type ) );
             }
         }
         
