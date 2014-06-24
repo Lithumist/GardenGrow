@@ -2,6 +2,7 @@
 #include "game.h"
 #include "funcs.h"
 #include <iostream>
+#include <algorithm>
 
 ggGame::ggGame( ggInterface* in , ggInterfaceController* cur_ctrl )
 {
@@ -91,6 +92,7 @@ void ggGame::tick( sf::Window* window )
                 ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
                 ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
                 // TODO -> check for chains
+                // TODO -> Spinners, check new position will be free. Sometimes not free because of non movable types.
                 if ( rCell && rCell->is_movable() ) {
                     ++ rCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
@@ -136,6 +138,11 @@ void ggGame::tick( sf::Window* window )
                 }
             }
         }
+
+        // reverse the order of the old cells
+        // to make the order in which you place pusher cells more intuitive 
+        // TODO -> sort list so that the cells that are furthest north west are first.
+        std::reverse( i->cellsCurrent.begin(), i->cellsCurrent.end() );
 
         // third pass through the old cells
         // add cells with new positions to updated vector
