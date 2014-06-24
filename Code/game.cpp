@@ -69,7 +69,7 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
-        /*
+        
         // first pass through the old cells
         // determine how many cells will affect each cell
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
@@ -118,9 +118,9 @@ void ggGame::tick( sf::Window* window )
                 }
             }
         }
-        */
-
         
+
+        /*
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             // get old position
@@ -263,7 +263,7 @@ void ggGame::tick( sf::Window* window )
             
 
             
-
+            */
             
             /*****************/
             /* </game logic> */
