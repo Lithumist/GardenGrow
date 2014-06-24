@@ -72,6 +72,11 @@ void ggGame::tick( sf::Window* window )
     {
         // TODO -> handle water cells somehow
 
+        /*
+            WHAT TO DO NEXT:
+            Implement chain checking. Have fun.
+        */
+
         // first pass though old cells
         // reset AffectCount
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t ) {
