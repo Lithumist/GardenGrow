@@ -81,7 +81,6 @@ public:
     void delCellInitial( int x, int y );
     void loadInitialCellPattern();
     void flipCellBuffers();
-    void resetCellDelta();
 
     int countCellsAt(int x, int y);
     void deleteCellsAt(int x, int y);

@@ -306,7 +306,6 @@ void ggGame::tick( sf::Window* window )
         out("Tick ");
         out(uint_to_string( (unsigned int)i->cellsCurrent.size() ));
         out(".\n");
-        i->resetCellDelta();
         i->flipCellBuffers();
         tickTimer.restart();
     }
