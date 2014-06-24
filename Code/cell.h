@@ -21,6 +21,9 @@ private:
     static sf::Texture txtCell;
     void drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool nopan = false);
 
+    // positions
+    int curX, curY, newX, newY;
+
 public:
     // load the texture
     static void loadTexture();
@@ -33,6 +36,19 @@ public:
 
     // delete flag
     bool del;
+
+    // affect count
+    int AffectCount;
+    
+    // positions get/set
+    int  get_cur_pos_x()            { return curX; }
+    int  get_cur_pos_y()            { return curY; }
+    int  get_new_pos_x()            { return newX; }
+    int  get_new_pos_y()            { return newY; }
+    void set_cur_pos_x( int argX )  { curX = argX; newX = argX; }
+    void set_cur_pos_y( int argY )  { curY = argY; newY = argY; }
+    void set_new_pos_x( int argX )  { newX = argX; }
+    void set_new_pos_y( int argY )  { newY = argY; }
 
     // displacement
     int dx, dy;

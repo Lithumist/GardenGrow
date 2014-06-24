@@ -69,6 +69,58 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
+        /*
+        // first pass through the old cells
+        // determine how many cells will affect each cell
+        for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
+        {
+            ggCell oldCell( i->cellsCurrent[t] );
+
+            if ( oldCell.type == CELL_PUSH || oldCell.type == CELL_SPIN )
+            {
+                ggCell* rCell = i->cellAt( oldCell.get_cur_pos_x() + 1, oldCell.get_cur_pos_y()     );
+                ggCell* lCell = i->cellAt( oldCell.get_cur_pos_x() - 1, oldCell.get_cur_pos_y()     );
+                ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
+                ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
+                // TODO -> handle chains
+                if ( rCell ) {
+                    ++ rCell->AffectCount;
+                    if ( oldCell.type == CELL_PUSH ) {
+                        oldCell.set_new_pos_x( oldCell.get_cur_pos_x() + 1 );
+                    }
+                    if ( oldCell.type == CELL_SPIN ) {
+                        oldCell.set_new_pos_x( oldCell.get_cur_pos_x() - 1 );
+                        oldCell.set_new_pos_y( oldCell.get_cur_pos_y() + 1 );
+                    }
+                }
+
+                if ( lCell ) {
+                    ++ lCell->AffectCount;
+                }
+
+                if ( dCell ) {
+                    ++ dCell->AffectCount;
+                }
+
+                if ( uCell ) {
+                    ++ uCell->AffectCount;
+                }
+            }
+
+            // second pass through the old cells
+            // calculate each cell's new position if AffectCount <= 1
+            for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
+            {
+                ggCell oldCell( i->cellsCurrent[t] );
+
+                if ( oldCell.AffectCount <= 1 ) {
+                    
+                }
+            }
+        }
+        */
+
+        
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             // get old position
@@ -212,7 +264,7 @@ void ggGame::tick( sf::Window* window )
 
             
 
-
+            
             /*****************/
             /* </game logic> */
             /*****************/

@@ -23,4 +23,10 @@ enum ggCellType             { CELL_ANY     = 0,
 
 enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME };
 
+/*
+struct _ggMoveInfo {
+    
+};
+*/
+
 #endif
