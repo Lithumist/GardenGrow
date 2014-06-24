@@ -352,7 +352,7 @@ void ggInterface::addCellInitial( ggCell cell ) {
 void ggInterface::delCellInitial( int x, int y )
 {
     for ( unsigned int c=0; c<cellsInitial.size(); ++c ) {
-        if ( cellsInitial[c].x == x && cellsInitial[c].y == y )
+        if ( cellsInitial[c].get_cur_pos_x() == x && cellsInitial[c].get_cur_pos_y() == y )
         {
             cellsInitial.erase( cellsInitial.begin() + c );
         }

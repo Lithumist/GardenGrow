@@ -70,7 +70,6 @@ void ggGame::tick( sf::Window* window )
     if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
         // TODO -> handle water cells somehow
-        // TODO -> handle AffectCount >= 1 cells not disapearing
 
         // first pass though old cells
         // reset AffectCount
