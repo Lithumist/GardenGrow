@@ -63,7 +63,7 @@ public:
     
     // constructors
     ggCell();
-    ggCell(int xgrid, int ygrid, ggCellType typ);
+    ggCell(int argXGrid, int argYGrid, ggCellType argType);
 
     // functions
     void draw( ggInterface* i , sf::RenderWindow* window , bool nopan = false );

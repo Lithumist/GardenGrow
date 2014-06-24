@@ -11,10 +11,12 @@ ggCell::ggCell() {
     ggCell( 0,0,CELL_SEED );
 }
 
-ggCell::ggCell(int xgrid, int ygrid, ggCellType typ) :
- x      (xgrid),
- y      (ygrid),
- type   (typ),
+ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
+ curX   (argXGrid),
+ curY   (argYGrid),
+ newX   (argXGrid),
+ newY   (argYGrid),
+ type   (argType),
  disable(false),
  dx     (0),
  dy     (0),
@@ -43,7 +45,7 @@ void ggCell::drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool
         px = i->panX;
         py = i->panY;
     }
-    sf::Vector2f pos = i->gridToWindow( (float)gx() , (float)gy() );
+    sf::Vector2f pos = i->gridToWindow( (float)get_cur_pos_x() , (float)get_cur_pos_y() );
     pos.x -= px;
     pos.y -= py;
     sprTile.setPosition( pos );

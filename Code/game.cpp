@@ -69,9 +69,12 @@ void ggGame::tick( sf::Window* window )
 
     if ( tickTimer.getElapsedTime() >= timeForOneTick && !flagPaused )
     {
-        
+        // TODO -> handle water cells somehow
+        // TODO -> handle AffectCount >= 1 cells not disapearing
+
         // first pass through the old cells
         // determine how many cells will affect each cell
+        // also calculates the new positions (applied in second pass if AffectCount <= 1)
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             ggCell oldCell( i->cellsCurrent[t] );
@@ -82,40 +85,63 @@ void ggGame::tick( sf::Window* window )
                 ggCell* lCell = i->cellAt( oldCell.get_cur_pos_x() - 1, oldCell.get_cur_pos_y()     );
                 ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
                 ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
-                // TODO -> handle chains
+                // TODO -> check for chains
+                // TODO -> check for movable type
                 if ( rCell ) {
                     ++ rCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
-                        oldCell.set_new_pos_x( oldCell.get_cur_pos_x() + 1 );
+                        rCell->set_new_pos_x( rCell->get_cur_pos_x() + 1 );
                     }
                     if ( oldCell.type == CELL_SPIN ) {
-                        oldCell.set_new_pos_x( oldCell.get_cur_pos_x() - 1 );
-                        oldCell.set_new_pos_y( oldCell.get_cur_pos_y() + 1 );
+                        rCell->set_new_pos_x( rCell->get_cur_pos_x() - 1 );
+                        rCell->set_new_pos_y( rCell->get_cur_pos_y() + 1 );
                     }
                 }
 
                 if ( lCell ) {
                     ++ lCell->AffectCount;
+                    if ( oldCell.type == CELL_PUSH ) {
+                        lCell->set_new_pos_x( lCell->get_cur_pos_x() - 1 );
+                    }
+                    if ( oldCell.type == CELL_SPIN ) {
+                        lCell->set_new_pos_x( lCell->get_cur_pos_x() + 1 );
+                        lCell->set_new_pos_y( lCell->get_cur_pos_y() - 1 );
+                    }
                 }
 
                 if ( dCell ) {
                     ++ dCell->AffectCount;
+                    if ( oldCell.type == CELL_PUSH ) {
+                        dCell->set_new_pos_y( dCell->get_cur_pos_y() + 1 );
+                    }
+                    if ( oldCell.type == CELL_SPIN ) {
+                        dCell->set_new_pos_x( dCell->get_cur_pos_x() - 1 );
+                        dCell->set_new_pos_y( dCell->get_cur_pos_y() - 1 );
+                    }
                 }
 
                 if ( uCell ) {
                     ++ uCell->AffectCount;
+                    if ( oldCell.type == CELL_PUSH ) {
+                        uCell->set_new_pos_y( uCell->get_cur_pos_y() - 1 );
+                    }
+                    if ( oldCell.type == CELL_SPIN ) {
+                        uCell->set_new_pos_x( uCell->get_cur_pos_x() + 1 );
+                        uCell->set_new_pos_y( uCell->get_cur_pos_y() + 1 );
+                    }
                 }
             }
+        }
 
-            // second pass through the old cells
-            // calculate each cell's new position if AffectCount <= 1
-            for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
-            {
-                ggCell oldCell( i->cellsCurrent[t] );
+        // second pass through the old cells
+        // add cells with new positions to updated vector
+        // only if AffectCount <= 1
+        for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
+        {
+            ggCell oldCell( i->cellsCurrent[t] );
 
-                if ( oldCell.AffectCount <= 1 ) {
-                    
-                }
+            if ( oldCell.AffectCount <= 1 ) {
+                i->cellsUpdated.push_back( ggCell( oldCell.get_new_pos_x(), oldCell.get_new_pos_y(), oldCell.type ) );
             }
         }
         
@@ -263,12 +289,10 @@ void ggGame::tick( sf::Window* window )
             
 
             
-            */
             
-            /*****************/
-            /* </game logic> */
-            /*****************/
+
         }
+        */
         out("Tick ");
         out(uint_to_string( (unsigned int)i->cellsCurrent.size() ));
         out(".\n");
