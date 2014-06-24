@@ -18,8 +18,6 @@ ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
  newY   (argYGrid),
  type   (argType),
  disable(false),
- dx     (0),
- dy     (0),
  full   (false),
  del    (false),
  AffectCount(0)
@@ -71,4 +69,13 @@ void ggCell::draw( ggInterface* i , sf::RenderWindow* window , bool nopan )
     {
         drawTile( 5+type, window, i, nopan );
     }
+}
+
+bool ggCell::is_movable()
+{
+    if ( type == CELL_PUSH ) return false;
+    if ( type == CELL_SPIN ) return false;
+    if ( type == CELL_WSPAWN  ) return false;
+    if ( full ) return false;
+    return true;
 }

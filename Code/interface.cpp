@@ -439,6 +439,7 @@ int ggInterface::countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrLis
 
 bool ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount )
 {
+    /*
     ggCell* cellUnder = cellAt( argTop->gx(), argTop->gy() );
     if ( cellUnder && !isMovable( *cellUnder ) ) {
         argTop->dx = 0;
@@ -446,7 +447,7 @@ bool ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned 
         return false;
     }
     if ( cellUnder ) {
-        if ( argCount <= GG_MAX_CELL_DISPLACEMENT_CHAIN /* && !cellUnder->full */ ) {
+        if ( argCount <= GG_MAX_CELL_DISPLACEMENT_CHAIN /* && !cellUnder->full  ) {
             cellUnder->dx = argDx;
             cellUnder->dy = argDy;
             ++ argCount;
@@ -461,13 +462,6 @@ bool ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned 
         argTop->dy = 0;
         return false;
     }
-    return true;
-}
-
-bool ggInterface::isMovable( ggCell& argCell )
-{
-    if ( argCell.type == CELL_PUSH ) return false;
-    if ( argCell.type == CELL_SPIN ) return false;
-    if ( argCell.full ) return false;
+    */
     return true;
 }

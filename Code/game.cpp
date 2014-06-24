@@ -91,8 +91,7 @@ void ggGame::tick( sf::Window* window )
                 ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
                 ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
                 // TODO -> check for chains
-                // TODO -> check for movable type
-                if ( rCell ) {
+                if ( rCell && rCell->is_movable() ) {
                     ++ rCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
                         rCell->set_new_pos_x( rCell->get_cur_pos_x() + 1 );
@@ -103,7 +102,7 @@ void ggGame::tick( sf::Window* window )
                     }
                 }
 
-                if ( lCell ) {
+                if ( lCell && lCell->is_movable() ) {
                     ++ lCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
                         lCell->set_new_pos_x( lCell->get_cur_pos_x() - 1 );
@@ -114,7 +113,7 @@ void ggGame::tick( sf::Window* window )
                     }
                 }
 
-                if ( dCell ) {
+                if ( dCell && dCell->is_movable() ) {
                     ++ dCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
                         dCell->set_new_pos_y( dCell->get_cur_pos_y() + 1 );
@@ -125,7 +124,7 @@ void ggGame::tick( sf::Window* window )
                     }
                 }
 
-                if ( uCell ) {
+                if ( uCell && uCell->is_movable() ) {
                     ++ uCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
                         uCell->set_new_pos_y( uCell->get_cur_pos_y() - 1 );

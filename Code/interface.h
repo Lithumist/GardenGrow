@@ -89,7 +89,6 @@ public:
     int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);
 
     bool handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount=0 );
-    bool isMovable( ggCell& argCell );
 
 };
 

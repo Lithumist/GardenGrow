@@ -50,10 +50,8 @@ public:
     void set_new_pos_x( int argX )  { newX = argX; }
     void set_new_pos_y( int argY )  { newY = argY; }
 
-    // displacement
-    int dx, dy;
-    int gx(){ return x+dx; }
-    int gy(){ return y+dy; }
+    // movable type function
+    bool is_movable();
 
     // type
     ggCellType type;
