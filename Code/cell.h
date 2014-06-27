@@ -34,8 +34,8 @@ public:
     // full flag
     bool full;
 
-    // delete flag
-    bool del;
+    // is watered flag
+    bool watered;
 
     // affect count
     int AffectCount;

@@ -85,6 +85,34 @@ void ggGame::tick( sf::Window* window )
         {
             ggCell oldCell( i->cellsCurrent[t] );
 
+            // update the watered flag for the cell
+            if ( oldCell.type == CELL_WATER ) {
+                oldCell.watered = true;
+            } else {
+                int count = 0;
+                ggCell* rCell = i->cellAt( oldCell.get_cur_pos_x() + 1, oldCell.get_cur_pos_y()     );
+                ggCell* lCell = i->cellAt( oldCell.get_cur_pos_x() - 1, oldCell.get_cur_pos_y()     );
+                ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
+                ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
+                if ( rCell && rCell->type == CELL_WATER ) ++ count;
+                if ( lCell && lCell->type == CELL_WATER ) ++ count;
+                if ( dCell && dCell->type == CELL_WATER ) ++ count;
+                if ( uCell && uCell->type == CELL_WATER ) ++ count;
+                if ( count >= 1 ) {
+                    oldCell.watered = true;
+                } else {
+                    oldCell.watered = false;
+                }
+            }
+
+            if ( oldCell.type == CELL_SEED && oldCell.watered ) {
+                i->cellsCurrent[t].type = CELL_FLOWER;
+            }
+
+            if ( oldCell.type == CELL_FLOWER && !oldCell.watered ) {
+                i->cellsCurrent[t].type = CELL_DEAD;
+            }
+
             if ( oldCell.type == CELL_PUSH || oldCell.type == CELL_SPIN )
             {
                 ggCell* rCell = i->cellAt( oldCell.get_cur_pos_x() + 1, oldCell.get_cur_pos_y()     );

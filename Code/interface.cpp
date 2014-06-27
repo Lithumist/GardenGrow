@@ -387,12 +387,15 @@ int ggInterface::countCellsAt(int x, int y)
 
 void ggInterface::deleteCellsAt(int x, int y)
 {
+    std::cout <<  "DEPRECIATED FUNCTION ggInterface::deleteCellsAt()" ;
+    /*
     for ( unsigned int c=0; c<cellsCurrent.size(); ++c ) {
         if ( cellsCurrent[c].get_cur_pos_x() == x && cellsCurrent[c].get_cur_pos_y() == y )
         {
             cellsCurrent[c].del = true;
         }
     }
+    */
 
 }
 

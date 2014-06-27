@@ -19,7 +19,7 @@ ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
  type   (argType),
  disable(false),
  full   (false),
- del    (false),
+ watered(false),
  AffectCount(0)
 {}
 
