@@ -155,15 +155,37 @@ void ggGame::tick( sf::Window* window )
         // third pass through the old cells
         // add cells with new positions to updated vector
         // only if AffectCount <= 1
+        // also handle fountain cells
         for ( unsigned int t=0; t<i->cellsCurrent.size(); ++t )
         {
             ggCell oldCell( i->cellsCurrent[t] );
+
+            if ( oldCell.type == CELL_WSPAWN )
+            {
+                ggCell* rCell = i->cellAt( oldCell.get_cur_pos_x() + 1, oldCell.get_cur_pos_y()     );
+                ggCell* lCell = i->cellAt( oldCell.get_cur_pos_x() - 1, oldCell.get_cur_pos_y()     );
+                ggCell* dCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() + 1 );
+                ggCell* uCell = i->cellAt( oldCell.get_cur_pos_x()    , oldCell.get_cur_pos_y() - 1 );
+
+                if ( !rCell ) {
+                    i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x() + 1, oldCell.get_new_pos_y(), CELL_WATER ) );
+                }
+                if ( !lCell ) {
+                    i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x() - 1, oldCell.get_new_pos_y(), CELL_WATER ) );
+                }
+                if ( !dCell ) {
+                    i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x(), oldCell.get_new_pos_y() + 1, CELL_WATER ) );
+                }
+                if ( !uCell ) {
+                    i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x(), oldCell.get_new_pos_y() - 1, CELL_WATER ) );
+                }
+            }
 
             if ( oldCell.AffectCount <= 1 ) {
                 i->cellsUpdated.push_back( ggCell( oldCell.get_new_pos_x(), oldCell.get_new_pos_y(), oldCell.type ) );
             } else 
             {
-                out( "jam " + std::to_string( oldCell.AffectCount ) + "\n" );
+                //out( "jam " + std::to_string( oldCell.AffectCount ) + "\n" );
                 i->cellsUpdated.push_back( ggCell( oldCell.get_cur_pos_x(), oldCell.get_cur_pos_y(), oldCell.type ) );
             }
         }
