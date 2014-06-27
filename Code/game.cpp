@@ -100,7 +100,6 @@ void ggGame::tick( sf::Window* window )
                 if ( rCell && rCell->is_movable() && i->can_push( rCell, DIRECTION_RIGHT ) ) {
                     ++ rCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
-                        //rCell->set_new_pos_x( rCell->get_cur_pos_x() + 1 );
                         move_chain( rCell, DIRECTION_RIGHT );
                     }
                     if ( oldCell.type == CELL_SPIN ) {
@@ -112,7 +111,6 @@ void ggGame::tick( sf::Window* window )
                 if ( lCell && lCell->is_movable() && i->can_push( lCell, DIRECTION_LEFT ) ) {
                     ++ lCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
-                        //lCell->set_new_pos_x( lCell->get_cur_pos_x() - 1 );#
                         move_chain( lCell, DIRECTION_LEFT );
                     }
                     if ( oldCell.type == CELL_SPIN ) {
@@ -124,7 +122,6 @@ void ggGame::tick( sf::Window* window )
                 if ( dCell && dCell->is_movable() && i->can_push( dCell, DIRECTION_DOWN ) ) {
                     ++ dCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
-                        //dCell->set_new_pos_y( dCell->get_cur_pos_y() + 1 );
                         move_chain( dCell, DIRECTION_DOWN );
                     }
                     if ( oldCell.type == CELL_SPIN ) {
@@ -136,7 +133,6 @@ void ggGame::tick( sf::Window* window )
                 if ( uCell && uCell->is_movable() && i->can_push( uCell, DIRECTION_UP ) ) {
                     ++ uCell->AffectCount;
                     if ( oldCell.type == CELL_PUSH ) {
-                        //uCell->set_new_pos_y( uCell->get_cur_pos_y() - 1 );
                         move_chain( uCell, DIRECTION_UP );
                     }
                     if ( oldCell.type == CELL_SPIN ) {

@@ -42,6 +42,6 @@
 #define GG_BOM_WRONG 0x000000ff
 // byte order marking
 
-#define GG_MAX_CELL_DISPLACEMENT_CHAIN 3
+#define GG_MAX_CELL_DISPLACEMENT_CHAIN 10
 
 #endif
