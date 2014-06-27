@@ -349,14 +349,18 @@ void ggInterface::addCellInitial( ggCell cell ) {
     cellsInitial.push_back( cell );
 }
 
-void ggInterface::delCellInitial( int x, int y )
+ggCell ggInterface::delCellInitial( int x, int y )
 {
     for ( unsigned int c=0; c<cellsInitial.size(); ++c ) {
         if ( cellsInitial[c].get_cur_pos_x() == x && cellsInitial[c].get_cur_pos_y() == y )
         {
+            // get a copy before deleting
+            ggCell cellCopy = cellsInitial[c];
             cellsInitial.erase( cellsInitial.begin() + c );
+            return cellCopy;
         }
     }
+    return ggCell( 0, 0, CELL_ANY );
 }
 
 void ggInterface::loadInitialCellPattern() {
@@ -373,7 +377,7 @@ int ggInterface::countCellsAt(int x, int y)
 {
     int count = 0;
     for ( unsigned int c=0; c<cellsCurrent.size(); ++c ) {
-        if ( cellsCurrent[c].x == x && cellsCurrent[c].y == y )
+        if ( cellsCurrent[c].get_cur_pos_x() == x && cellsCurrent[c].get_cur_pos_y() == y )
         {
             ++ count;
         }
@@ -384,7 +388,7 @@ int ggInterface::countCellsAt(int x, int y)
 void ggInterface::deleteCellsAt(int x, int y)
 {
     for ( unsigned int c=0; c<cellsCurrent.size(); ++c ) {
-        if ( cellsCurrent[c].x == x && cellsCurrent[c].y == y )
+        if ( cellsCurrent[c].get_cur_pos_x() == x && cellsCurrent[c].get_cur_pos_y() == y )
         {
             cellsCurrent[c].del = true;
         }
@@ -464,4 +468,48 @@ bool ggInterface::handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned 
     }
     */
     return true;
+}
+
+bool ggInterface::can_push( ggCell* argCell, _ggDirection argDir, unsigned int argCount )
+{
+    // check we haven't gone too far into the chain
+    if ( argCount + 1 > GG_MAX_CELL_DISPLACEMENT_CHAIN ) {
+        return false;
+    }
+
+    // calculate position of next cell in the chain
+    int nextX, nextY;
+    if ( argDir == DIRECTION_RIGHT ) {
+        nextX = argCell->get_cur_pos_x() + 1;
+        nextY = argCell->get_cur_pos_y();
+    }
+    if ( argDir == DIRECTION_LEFT ) {
+        nextX = argCell->get_cur_pos_x() - 1;
+        nextY = argCell->get_cur_pos_y();
+    }
+    if ( argDir == DIRECTION_DOWN ) {
+        nextX = argCell->get_cur_pos_x();
+        nextY = argCell->get_cur_pos_y() + 1;
+    }
+    if ( argDir == DIRECTION_UP ) {
+        nextX = argCell->get_cur_pos_x();
+        nextY = argCell->get_cur_pos_y() - 1;
+    }
+    
+    // find the cell in that position
+    ggCell* nextCell = cellAt( nextX, nextY );
+
+    // if it doesn't exist then we can move
+    if ( !nextCell ) {
+        return true;
+    } else {
+        // if it exists
+        // check if it's a movable type
+        if ( nextCell->is_movable() ) {
+            // check that we can move beyond that cell
+            return can_push( nextCell, argDir, argCount + 1 );
+        } else {
+            return false;
+        }
+    }
 }

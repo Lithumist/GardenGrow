@@ -42,7 +42,8 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
             // delete cell under
             ggCell* under = i->cellAt(gridLocation.x, gridLocation.y, CELL_ANY, &i->cellsInitial);
             if ( under ) {
-                i->delCellInitial(gridLocation.x, gridLocation.y);
+                ggCell cellDeleted = i->delCellInitial(gridLocation.x, gridLocation.y);
+                updateCount();
             }
             if ( i->selectedType == CELL_WSPAWN && wspawn_count >= GG_WSPAWN_MAX ) {
                 out("You can only place 1 water spawner!\n");
@@ -62,7 +63,8 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
         if ( e->mouseButton.y > GG_CONTROL_BAR_HEIGHT ) {
             sf::Vector2i gridLocation = i->windowToGrid( e->mouseButton.x , e->mouseButton.y );
             // std::cout << "(" << gridLocation.x << ", " << gridLocation.y << ")\n";
-            i->delCellInitial(gridLocation.x, gridLocation.y); // doesn't matter if cell doesn't exist
+            ggCell cellDeleted = i->delCellInitial(gridLocation.x, gridLocation.y); // doesn't matter if cell doesn't exist
+            updateCount();
         }
     }
 }

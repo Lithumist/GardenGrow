@@ -78,7 +78,7 @@ public:
 
     void addCell( ggCell cell );
     void addCellInitial( ggCell cell );
-    void delCellInitial( int x, int y );
+    ggCell delCellInitial( int x, int y );
     void loadInitialCellPattern();
     void flipCellBuffers();
 
@@ -88,7 +88,8 @@ public:
     int countCellsAdjacent(int x, int y, ggCellType ty=CELL_ANY);
     int countCellsAdjacent(int x, int y, std::array<ggCell*, 8>& ptrList, ggCellType ty=CELL_ANY);
 
-    bool handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount=0 );
+    bool handleOverlap( ggCell* argTop, int argDx, int argDy, unsigned int argCount=0 ); // depreciated
+    bool can_push( ggCell* argCell, _ggDirection argDir, unsigned int argCount=0 );
 
 };
 

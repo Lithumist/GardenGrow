@@ -23,6 +23,30 @@ enum ggCellType             { CELL_ANY     = 0,
 
 enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME };
 
+enum _ggDirection { DIRECTION_RIGHT = 1,
+                    DIRECTION_LEFT  = 2,
+                    DIRECTION_DOWN  = 3,
+                    DIRECTION_UP    = 4
+                  };
+inline int direction_to_x( _ggDirection argDir ) {
+    if ( argDir == DIRECTION_RIGHT ) {
+        return 1;
+    } else if ( argDir == DIRECTION_LEFT ) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+inline int direction_to_y( _ggDirection argDir ) {
+    if ( argDir == DIRECTION_DOWN ) {
+        return 1;
+    } else if ( argDir == DIRECTION_UP ) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
 /*
 struct _ggMoveInfo {
     
