@@ -27,7 +27,7 @@
 // GG_DEFAULT_TICK_TIME is in seconds.
 
 #define GG_WSPAWN_MAX 1
-#define GG_SEED_MAX 20
+#define GG_SEED_MAX 20000000
 
 #define GG_RESTRICT_CELL_SELECT
 // comment out for debug mode where you can palce all cell types
