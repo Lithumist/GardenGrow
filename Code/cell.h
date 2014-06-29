@@ -20,6 +20,7 @@ private:
     // spritesheet texture
     static sf::Texture txtCell;
     void drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool nopan = false);
+    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, int gridXpos, int gridYpos, bool nopan = false);
 
     // positions
     int curX, curY, newX, newY;
