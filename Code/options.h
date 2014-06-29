@@ -23,13 +23,13 @@
 
 #define GG_BACKGROUND_COLOUR sf::Color(52,123,4)
 
-#define GG_DEFAULT_TICK_TIME 0.1f 
+#define GG_DEFAULT_TICK_TIME 0.4f 
 // GG_DEFAULT_TICK_TIME is in seconds.
 
 #define GG_WSPAWN_MAX 1
 #define GG_SEED_MAX 20000000
 
-#define GG_RESTRICT_CELL_SELECT
+//#define GG_RESTRICT_CELL_SELECT
 // comment out for debug mode where you can palce all cell types
 
 #define GG_BYTES_PER_CELL 12

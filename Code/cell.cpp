@@ -20,7 +20,8 @@ ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
  disable(false),
  full   (false),
  watered(false),
- AffectCount(0)
+ AffectCount(0),
+ indexFlower(rand()%5)
 {}
 
 void ggCell::loadTexture() {
@@ -63,7 +64,7 @@ void ggCell::draw( ggInterface* i , sf::RenderWindow* window , bool nopan )
     }
     else if  ( type == 4 ) // flowers
     {
-        drawTile( 4 + (rand()%5), window, i, nopan );
+        drawTile( 4 + indexFlower, window, i, nopan );
     }
     else if  ( type >= 5 ) // other types
     {
