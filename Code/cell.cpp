@@ -20,6 +20,7 @@ ggCell::ggCell(int argXGrid, int argYGrid, ggCellType argType) :
  disable(false),
  full   (false),
  watered(false),
+ watered2(false),
  AffectCount(0),
  indexFlower(rand()%5)
 {}

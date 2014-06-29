@@ -104,14 +104,28 @@ void ggGame::tick( sf::Window* window )
                 } else {
                     oldCell.watered = false;
                 }
+                if ( count >= 2 ) {
+                    oldCell.watered2 = true;
+                } else {
+                    oldCell.watered2 = false;
+                }
             }
 
             if ( oldCell.type == CELL_SEED && oldCell.watered ) {
                 i->cellsCurrent[t].type = CELL_FLOWER;
             }
 
+            if ( oldCell.type == CELL_T_SAP && oldCell.watered2 ) {
+                i->cellsCurrent[t].type = CELL_T_BASE;
+                // TODO -> Make the rest of the tree here??? Idk.
+            }
+
             if ( oldCell.type == CELL_FLOWER && !oldCell.watered ) {
                 i->cellsCurrent[t].type = CELL_DEAD;
+            }
+
+            if ( oldCell.type == CELL_T_BASE && !oldCell.watered2 ) {
+                i->cellsCurrent[t].type = CELL_T_STUMP;
             }
 
             if ( oldCell.type == CELL_PUSH || oldCell.type == CELL_SPIN )

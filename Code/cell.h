@@ -36,6 +36,7 @@ public:
 
     // is watered flag
     bool watered;
+    bool watered2;
 
     // flower sprite index
     int indexFlower;

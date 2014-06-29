@@ -18,7 +18,14 @@ enum ggCellType             { CELL_ANY     = 0,
                               CELL_PUSH    = 6, 
                               CELL_SPIN    = 7, 
                               CELL_WSPAWN  = 8,
-                              CELL_DEAD    = 9
+                              CELL_DEAD    = 9,
+
+                              CELL_T_LEFT  = 10,
+                              CELL_T_MID   = 11,
+                              CELL_T_RIGHT = 12,
+                              CELL_T_STUMP = 20,
+                              CELL_T_BASE  = 21,
+                              CELL_T_SAP   = 22
                             };
 
 enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME };
