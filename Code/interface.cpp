@@ -25,6 +25,9 @@ bool ggInterface::loadAssets()
     if ( !txtBtnControl.loadFromFile("data/btn_control.png") ) {
         success = false;
     }
+    if ( !fontCaption.loadFromFile( "data/Minecrafter_3.ttf" ) ) {
+        success = false;
+    }
     return success;
 }
 
@@ -54,6 +57,19 @@ void ggInterface::init()
 
     btnCentre.init( sf::IntRect(20,40,20,20) , sf::IntRect(20,60,20,20) , &txtBtnControl );
     btnCentre.setPosition( 322 , 5 );
+
+
+    // set up texts
+    textTest.setFont( fontCaption );
+    textTest.setString( "Hello World!" );
+    textTest.setCharacterSize( 32 );
+    textTest.setColor( sf::Color::Magenta );
+
+    textLimit.setFont( fontCaption );
+    textLimit.setString( "no limit" );
+    textLimit.setCharacterSize( 10 );
+    textLimit.setColor( sf::Color::Green );
+    textLimit.setPosition( 4, 585 );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
@@ -90,6 +106,19 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
                 selectedType = CELL_WSPAWN;
             }
             #endif
+
+            // update cell limit caption
+            if ( selectedType == CELL_WSPAWN ) {
+                textLimit.setString( std::to_string(wspawn_count) + " / 1" );
+                if ( wspawn_count >= 1 ) {
+                    textLimit.setColor( sf::Color::Red );
+                } else {
+                    textLimit.setColor( sf::Color::Green );
+                }
+            } else {
+                textLimit.setString( "no limit" );
+                textLimit.setColor( sf::Color::Green );
+            }
         }
     }
 
@@ -137,6 +166,14 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
 
 void ggInterface::tick(sf::Window* window)
 {
+    if ( selectedType == CELL_WSPAWN ) {
+        if ( wspawn_count >= 1 ) {
+            textLimit.setColor( sf::Color::Red );
+        } else {
+            textLimit.setColor( sf::Color::Green );
+        }
+    }
+
     // tick buttons
     btnPlay.tick(window);
     btnPause.tick(window);
@@ -252,6 +289,10 @@ void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVect
     window->draw( btnReset );
     window->draw( btnGrid );
     window->draw( btnCentre );
+
+    // draw test text
+    //window->draw( textTest );
+    window->draw( textLimit );
 }
 
 

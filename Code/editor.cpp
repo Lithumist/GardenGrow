@@ -74,6 +74,8 @@ void ggEditor::tick( sf::Window* window )
     if ( *currentController != CTRL_EDITOR ) {
         return;
     }
+    
+    i->wspawn_count = wspawn_count;
 
     // If play pressed, hand control over to game.
     if ( i->btnPlay.doAction ) {

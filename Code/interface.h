@@ -45,6 +45,12 @@ public:
     std::vector<ggCell> cellsCurrent;
     std::vector<ggCell> cellsUpdated;
     std::vector<ggCell> cellsInitial;
+    
+    // fonts and texts
+    sf::Font fontCaption;
+    sf::Text textTest;
+    sf::Text textLimit; // cell limit caption
+        int wspawn_count;
 
     // zoom and pan variables
     float zoomLevel;
