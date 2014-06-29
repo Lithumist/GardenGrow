@@ -73,7 +73,7 @@ int main()
     {
         // events
         sf::Event event;
-        while (gameWindow.pollEvent(event))
+        if (gameWindow.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 gameWindow.close();

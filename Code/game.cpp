@@ -18,6 +18,7 @@ ggGame::ggGame( ggInterface* in , ggInterfaceController* cur_ctrl )
 
     timeForOneTick = sf::seconds( GG_DEFAULT_TICK_TIME );
     flagPaused = false;
+
 }
 
 void ggGame::onControl()
@@ -27,6 +28,9 @@ void ggGame::onControl()
     // Modify interface options
     i->btnResetEnabled = false;
     i->tileSelectorEnabled = false;
+
+    // reset the tick timer
+    tickTimer.restart();
 }
 
 void ggGame::onEvent( sf::Window* window , sf::Event* e )
@@ -34,9 +38,6 @@ void ggGame::onEvent( sf::Window* window , sf::Event* e )
     if ( *currentController != CTRL_GAME ) {
         return;
     }
-
-    // reset the tick timer
-    tickTimer.restart();
 }
 
 void ggGame::tick( sf::Window* window )
