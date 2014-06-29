@@ -166,6 +166,8 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
 
 void ggInterface::tick(sf::Window* window)
 {
+    ggCell::treeDrawList.clear();
+
     if ( selectedType == CELL_WSPAWN ) {
         if ( wspawn_count >= 1 ) {
             textLimit.setColor( sf::Color::Red );
@@ -266,6 +268,9 @@ void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVect
     for ( unsigned int c=0; c<cellVectorToDraw->size(); ++c ) {
         cellVectorToDraw->at(c).draw( this, window );
     }
+
+    // draw top cells
+    ggCell::draw_top_things( window, this);
 
     // draw grid
     if ( gridVisible ) {

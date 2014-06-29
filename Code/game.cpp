@@ -117,7 +117,6 @@ void ggGame::tick( sf::Window* window )
 
             if ( oldCell.type == CELL_T_SAP && oldCell.watered2 ) {
                 i->cellsCurrent[t].type = CELL_T_BASE;
-                // TODO -> Make the rest of the tree here??? Idk.
             }
 
             if ( oldCell.type == CELL_FLOWER && !oldCell.watered ) {

@@ -4,7 +4,8 @@
 #include "types.h"
 #include <SFML/System.hpp>
 
-sf::Texture ggCell::txtCell;
+sf::Texture           ggCell::txtCell;
+std::vector<ggCell*>  ggCell::treeDrawList;
 
 // Constructors
 ggCell::ggCell() {
@@ -61,6 +62,16 @@ void ggCell::drawTile( int index, sf::RenderWindow* window, ggInterface* i, int 
 }
 
 
+void ggCell::draw_top_things( sf::RenderWindow* window, ggInterface* i, bool nopan )
+{
+    for ( unsigned int t=0; t<treeDrawList.size(); ++t ) {
+        treeDrawList[t]->drawTile( 5+11, window, i, treeDrawList[t]->get_cur_pos_x(), treeDrawList[t]->get_cur_pos_y() - 1, nopan );
+        treeDrawList[t]->drawTile( 5+10, window, i, treeDrawList[t]->get_cur_pos_x() - 1, treeDrawList[t]->get_cur_pos_y() - 1, nopan );
+        treeDrawList[t]->drawTile( 5+12, window, i, treeDrawList[t]->get_cur_pos_x() + 1, treeDrawList[t]->get_cur_pos_y() - 1, nopan );
+    }
+}
+
+
 // Draw function
 void ggCell::draw( ggInterface* i , sf::RenderWindow* window , bool nopan )
 {
@@ -76,12 +87,10 @@ void ggCell::draw( ggInterface* i , sf::RenderWindow* window , bool nopan )
     {
         if ( type == 21 ) {
             // tree base,
-            // draw the rest of the tree also
             drawTile( 5+type, window, i, nopan );
-            // TODO -> Make sure all these get drawn above everything else
-            drawTile( 5+11, window, i, get_cur_pos_x(), get_cur_pos_y() - 1, nopan );
-            drawTile( 5+10, window, i, get_cur_pos_x() - 1, get_cur_pos_y() - 1, nopan );
-            drawTile( 5+12, window, i, get_cur_pos_x() + 1, get_cur_pos_y() - 1, nopan );
+            // make sure the rest of the tree be drawn later to be above everything else
+            treeDrawList.push_back( this );
+            
         } else {
             drawTile( 5+type, window, i, nopan );
         }

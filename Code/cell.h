@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "types.h"
+#include <vector>
 
 class ggInterface;
 
@@ -19,8 +20,8 @@ private:
     
     // spritesheet texture
     static sf::Texture txtCell;
-    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool nopan = false);
-    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, int gridXpos, int gridYpos, bool nopan = false);
+    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, bool nopan = false );
+    void drawTile( int index, sf::RenderWindow* window, ggInterface* i, int gridXpos, int gridYpos, bool nopan = false );
 
     // positions
     int curX, curY, newX, newY;
@@ -28,6 +29,11 @@ private:
 public:
     // load the texture
     static void loadTexture();
+
+    // fuck
+    static std::vector<ggCell*> treeDrawList;
+    // drawing things on top bullshit
+    static void draw_top_things( sf::RenderWindow* window, ggInterface* i, bool nopan = false );
 
     // position (in grid coords)
     int x, y;
