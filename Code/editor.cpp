@@ -47,7 +47,7 @@ void ggEditor::onEvent( sf::Window* window , sf::Event* e )
             }
             if ( i->selectedType == CELL_WSPAWN && wspawn_count >= GG_WSPAWN_MAX ) {
                 out("You can only place 1 water spawner!\n");
-            } else if ( i->selectedType == CELL_SEED && seed_count >= 20 ) {
+            } else if ( i->selectedType == CELL_SEED && seed_count >= GG_SEED_MAX ) {
                 out( "You can only place 20 seeds!\n");
             } else {
                 i->addCellInitial( ggCell(gridLocation.x, gridLocation.y, i->selectedType) );
