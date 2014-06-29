@@ -1,3 +1,8 @@
+NAH FUCK THIS EVERYTHINGS CHANGED..
+
+
+
+
 Due to an abstraction leak I have to make sure that none of the rules are affected by the order in which I place tiles...
 
 
