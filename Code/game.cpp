@@ -127,6 +127,14 @@ void ggGame::tick( sf::Window* window )
                 i->cellsCurrent[t].type = CELL_T_STUMP;
             }
 
+            if ( oldCell.type == CELL_LIGHT_0 && oldCell.watered ) {
+                i->cellsCurrent[t].type = CELL_LIGHT_1;
+            }
+
+            if ( oldCell.type == CELL_LIGHT_1 && !oldCell.watered ) {
+                i->cellsCurrent[t].type = CELL_LIGHT_0;
+            }
+
             if ( oldCell.type == CELL_PUSH || oldCell.type == CELL_SPIN )
             {
                 ggCell* rCell = i->cellAt( oldCell.get_cur_pos_x() + 1, oldCell.get_cur_pos_y()     );

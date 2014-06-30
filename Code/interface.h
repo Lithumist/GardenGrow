@@ -25,6 +25,9 @@ private:
     sf::Texture txtHelp;
     sf::Sprite  sprHelp;
 
+    // selection
+    int selectorIndex;
+
     // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
     int mouseXPrev, mouseYPrev;

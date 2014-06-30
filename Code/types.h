@@ -25,7 +25,10 @@ enum ggCellType             { CELL_ANY     = 0,
                               CELL_T_RIGHT = 12,
                               CELL_T_STUMP = 20,
                               CELL_T_BASE  = 21,
-                              CELL_T_SAP   = 22
+                              CELL_T_SAP   = 22,
+
+                              CELL_LIGHT_0 = 23,
+                              CELL_LIGHT_1 = 24
                             };
 
 enum ggInterfaceController  { CTRL_EDITOR , CTRL_GAME };

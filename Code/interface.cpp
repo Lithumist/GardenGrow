@@ -22,6 +22,7 @@ ggInterface::ggInterface()
     helpPosY = 200;
     helpScrollX = 1;
     helpScrollY = 1;
+    selectorIndex = 0;
 }
 
 bool ggInterface::loadAssets()
@@ -105,24 +106,11 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
             selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
             #ifdef GG_RESTRICT_CELL_SELECT
             // Code to restrict cell choice.
-            if ( selectedType == 2 && e->mouseWheel.delta == -1 ) {
-                selectedType = CELL_WSPAWN;
-            }
-            if ( selectedType == 4 && e->mouseWheel.delta == 1 ) {
-                selectedType = CELL_T_SAP;
-            }
-            if ( selectedType == 5 && e->mouseWheel.delta == -1 ) {
-                selectedType = CELL_T_SAP;
-            }
-            if ( selectedType == 9 ) {
-                selectedType = CELL_SEED;
-            }
-            if ( selectedType == 21 ) {
-                selectedType = CELL_SEED;
-            }
-            if ( selectedType == 23 ) {
-                selectedType = CELL_PUSH;
-            }
+            ggCellType allowedTypes [6] = { CELL_SEED, CELL_T_SAP, CELL_WSPAWN, CELL_PUSH, CELL_SPIN, CELL_LIGHT_0 };
+            selectorIndex += e->mouseWheel.delta;
+            if ( selectorIndex < 0 ) selectorIndex = 5;
+            if ( selectorIndex > 5 ) selectorIndex = 0;
+            selectedType = allowedTypes[ selectorIndex ];
             #endif
 
             // update cell limit caption
