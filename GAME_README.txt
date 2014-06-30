@@ -26,6 +26,14 @@ If you get stuck for ideas just load up one of the default patterns to see some 
 
 
 ==========================
+Camera Controls
+==========================
+
+Hold CTRL then use the mouse wheel to zoom in and out.
+Hold CTRL then hold the mouse wheel to pan.
+
+
+==========================
 Current Block List
 ==========================
 
