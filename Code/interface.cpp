@@ -105,17 +105,23 @@ void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
             selectedType = (ggCellType)(selectedType + e->mouseWheel.delta);
             #ifdef GG_RESTRICT_CELL_SELECT
             // Code to restrict cell choice.
+            if ( selectedType == 2 && e->mouseWheel.delta == -1 ) {
+                selectedType = CELL_WSPAWN;
+            }
             if ( selectedType == 4 && e->mouseWheel.delta == 1 ) {
-                selectedType = CELL_PUSH;
+                selectedType = CELL_T_SAP;
             }
             if ( selectedType == 5 && e->mouseWheel.delta == -1 ) {
+                selectedType = CELL_T_SAP;
+            }
+            if ( selectedType == 9 ) {
                 selectedType = CELL_SEED;
             }
-            if ( selectedType > 8 ) {
+            if ( selectedType == 21 ) {
                 selectedType = CELL_SEED;
             }
-            if ( selectedType < 3 ) {
-                selectedType = CELL_WSPAWN;
+            if ( selectedType == 23 ) {
+                selectedType = CELL_PUSH;
             }
             #endif
 
