@@ -22,6 +22,8 @@ class ggInterface
 private:
     // assets
     sf::Texture txtBtnControl;
+    sf::Texture txtHelp;
+    sf::Sprite  sprHelp;
 
     // triggers and event variables
     bool ctrlHeldDown, midHeldDownPrev;
@@ -45,6 +47,10 @@ public:
     std::vector<ggCell> cellsCurrent;
     std::vector<ggCell> cellsUpdated;
     std::vector<ggCell> cellsInitial;
+
+    // help
+    bool flagHelp;
+    int helpPosX, helpPosY, helpScrollX, helpScrollY;
     
     // fonts and texts
     sf::Font fontCaption;

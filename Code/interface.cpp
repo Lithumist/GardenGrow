@@ -17,6 +17,11 @@ ggInterface::ggInterface()
     btnResetEnabled = false;
     tileSelectorEnabled = false;
     selectedType = CELL_SEED;
+    flagHelp = false;
+    helpPosX = 200;
+    helpPosY = 200;
+    helpScrollX = 1;
+    helpScrollY = 1;
 }
 
 bool ggInterface::loadAssets()
@@ -26,6 +31,9 @@ bool ggInterface::loadAssets()
         success = false;
     }
     if ( !fontCaption.loadFromFile( "data/Minecrafter_3.ttf" ) ) {
+        success = false;
+    }
+    if ( !txtHelp.loadFromFile( "patterns/meta.gg" ) ) {
         success = false;
     }
     return success;
@@ -70,6 +78,10 @@ void ggInterface::init()
     textLimit.setCharacterSize( 10 );
     textLimit.setColor( sf::Color::Green );
     textLimit.setPosition( 4, 585 );
+
+
+    // Set up help
+    sprHelp.setTexture( txtHelp );
 }
 
 void ggInterface::onEvent( sf::Window* window ,sf::Event* e )
@@ -176,6 +188,21 @@ void ggInterface::tick(sf::Window* window)
         }
     }
 
+    // scroll help screen..
+    if ( flagHelp ) {
+        if ( helpPosX >= 700 )
+            helpScrollX = -1;
+        if ( helpPosX <= 0 )
+            helpScrollX = 1;
+        if ( helpPosY >= 525 )
+            helpScrollY = -1;
+        if ( helpPosY <= 0 )
+            helpScrollY = 1;
+        helpPosX += helpScrollX;
+        helpPosY += helpScrollY;
+        sprHelp.setPosition( (float)helpPosX, (float)helpPosY );
+    }
+
     // tick buttons
     btnPlay.tick(window);
     btnPause.tick(window);
@@ -271,6 +298,11 @@ void ggInterface::draw( sf::RenderWindow* window , std::vector<ggCell>* cellVect
 
     // draw top cells
     ggCell::draw_top_things( window, this);
+
+    // draw help
+    if ( flagHelp ) {
+        window->draw( sprHelp );
+    }
 
     // draw grid
     if ( gridVisible ) {

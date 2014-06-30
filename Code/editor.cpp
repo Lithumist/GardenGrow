@@ -101,6 +101,11 @@ void ggEditor::tick( sf::Window* window )
         i->btnLoad.doAction = false;
         // TODO -> Figure out how to update seed and fountain count after loading
         std::string pathFileName = pop_file_dialog( DIALOG_OPEN, "\\patterns\\", window->getSystemHandle() );
+        if ( pathFileName.find("GardenGrow.exe") != std::string::npos ) {
+            i->flagHelp = true;
+        } else {
+            i->flagHelp = false;
+        }
         if ( pathFileName != "" ) {
             load_from_image( pathFileName, i->cellsInitial );
             updateCount();
