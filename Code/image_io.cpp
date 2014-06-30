@@ -47,8 +47,8 @@ bool save_as_image( std::string argFilename, std::vector<ggCell>& argCells )
     for ( unsigned int index=0; index<argCells.size(); ++index ) {
         // generate colours
         sf::Color colX, colY, colType;
-        colX = int_to_pixel( argCells[index].x );
-        colY = int_to_pixel( argCells[index].y );
+        colX = int_to_pixel( argCells[index].get_cur_pos_x() );
+        colY = int_to_pixel( argCells[index].get_cur_pos_y() );
         colType = int_to_pixel( argCells[index].type );
         // write to image
         imgPattern.setPixel( posX, posY, colX );
